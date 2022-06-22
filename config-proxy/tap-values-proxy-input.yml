@@ -1,0 +1,15 @@
+#@data/values
+
+#@overlay/match-child-defaults missing_ok=True
+---
+tap:
+  devNamespace: tap-dev
+
+  domains:
+    learningCenter: learningcenter.y-compiles.com
+    knative: apps.y-compiles.com
+
+domain: y-compiles.com
+tls:
+  secretName: tls
+  namespace: tanzu-system-ingress

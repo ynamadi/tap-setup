@@ -1,0 +1,18 @@
+#@data/values
+
+#@overlay/match-child-defaults missing_ok=True
+---
+tap:
+  version: "1.2.0-build.13"
+  namespace: tap-install
+  catalogs: []
+
+  registry:
+    host: tapbuild.azurecr.io
+    repositories:
+      buildService: repo/build-service
+      ootbSupplyChain: repo/supply-chain
+
+  domains:
+    main: tap.y-compiles.com
+    tapGui: tap-gui-build.tap.y-compiles.com

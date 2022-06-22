@@ -13,3 +13,11 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+/gitops/tap-install-config.yml
+/gitops/tap-install-secrets.yml
+/cluster-essentials.sh
+/eks-cluster-setup.sh
+/.idea/
+/tanzu-cluster-essentials/
+/tanzu-cluster-essentials/
+tanzu-cluster-essentials/bundle/.imgpkg/images.yml
