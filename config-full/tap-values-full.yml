@@ -30,11 +30,11 @@ learningcenter:
       service_type: ClusterIP
 
 scanning:
+  ingress_enabled: "true"
+  ingress_domain: #@ data.values.tap.domains.main
+  app_service_type: "ClusterIP"  # recommended if ingress is enabled
   metadataStore:
     url: #@ data.values.tap.domains.metadataStore
-    ingress_enabled: "true"
-    ingress_domain: #@ data.values.tap.domains.main
-    app_service_type: "ClusterIP"
 
 tap_gui:
   service_type: ClusterIP
