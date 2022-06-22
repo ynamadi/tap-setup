@@ -20,7 +20,13 @@ ootb_supply_chain_basic:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
-    ssh_secret: ""
+#!    ssh_secret: ""
+    repository_prefix: #@ data.values.tap.supplychain.gitops.repo.prefix
+    branch: #@ data.values.tap.supplychain.gitops.repo.branch
+    user_name: #@ data.values.tap.supplychain.gitops.user.name
+    user_email: #@ data.values.tap.supplychain.gitops.user.email
+    commit_message: #@ data.values.tap.supplychain.gitops.repo.commit.message
+    ssh_secret: #@ data.values.tap.supplychain.gitops.secret
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
@@ -29,21 +35,13 @@ learningcenter:
     server:
       service_type: ClusterIP
 
-scanning:
-  metadataStore:
-    url: #@ data.values.tap.domains.metadataStore
-    ingress_enabled: "true"
-    ingress_domain: #@ data.values.tap.domains.main
-    app_service_type: ClusterIP
-    caSecret:
-      name: store-ca-cert
-      importFromNamespace: metadata-store-secrets
-    authSecret:
-      name: store-auth-token
-      importFromNamespace: metadata-store-secrets
-
 tap_gui:
   service_type: ClusterIP
+  ingressEnabled: "true"
+  ingressDomain: #@ data.values.tap.domains.main
+  tls:
+    namespace: tanzu-system-ingress
+    secretName: tls
   app_config:
     app:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
@@ -59,6 +57,8 @@ tap_gui:
       - type: url
         target: #@ catalog
       #@ end
+    supplyChain:
+      enablePlugin: true
     backend:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
       cors:
@@ -84,16 +84,40 @@ tap_gui:
             clientSecret: #@ data.values.tap.credentials.github.clientSecret
     #@ end
 
+metadata_store:
+  app_service_type: LoadBalancer
+  ns_for_export_app_cert: #@ data.values.tap.devNamespace
 
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
 
-metadata_store:
-  ingress_enabled: "true"
-  ingress_domain: #@ data.values.tap.domains.main
-  app_service_type: ClusterIP
-  ns_for_export_app_cert: #@ data.values.tap.devNamespace
+scanning:
+  metadataStore:
+    url: ""
+    caSecret:
+      name: store-ca-cert
+      importFromNamespace: metadata-store
+    authSecret:
+      name: store-auth-token
+      importFromNamespace: metadata-store
+
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+
+cnrs:
+  domain_name: #@ data.values.tap.domains.knative
+  default_tls_secret: tanzu-system-ingress/tls
+  domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
+
+appliveview:
+  ingressDomain: #@ data.values.tap.domains.main
+  ingressEnabled: false
+  tls:
+    namespace: tanzu-system-ingress
+    secretName: tls
 
 #@ end
 ---
@@ -135,7 +159,7 @@ metadata:
 stringData:
   add-custom-labels.yml: |
     #@ load("@ytt:overlay", "overlay")
-    
+
     #@overlay/match by=overlay.subset({"kind":"PackageInstall"}),expects="1+"
     ---
     metadata:
@@ -143,7 +167,7 @@ stringData:
       annotations:
         #@overlay/match missing_ok=True
         ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: my-custom-labels
-    
+
     ---
     apiVersion: v1
     kind: Secret
@@ -152,7 +176,7 @@ stringData:
     stringData:
       add-my-custom-labels.yml: |
         #@ load("@ytt:overlay", "overlay")
-    
+
         #@overlay/match by=overlay.subset({"kind": "Namespace"}),expects="0+"
         ---
         metadata:

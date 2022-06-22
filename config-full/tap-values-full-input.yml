@@ -10,7 +10,17 @@ tap:
     knative: apps.y-compiles.com
     appliveview:
       host: appliveview.y-compiles.com
-      port: 443
+  supplychain:
+    gitops:
+      repo:
+        prefix: ssh://git@github.com/ynamadi/
+        branch: main
+        commit:
+          message: supply-chain-commit
+      user:
+        name: ynamadi
+        email: ynamadi@vmware.com
+      secret: git-ssh
 
 domain: y-compiles.com
 tls:
