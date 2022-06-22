@@ -18,7 +18,7 @@ spec:
   - ytt:
       paths:
       - config
-      - config-build
+      - config-full
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops
