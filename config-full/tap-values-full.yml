@@ -22,20 +22,8 @@ ootb_supply_chain_basic:
   gitops:
     ssh_secret: ""
 
-learningcenter:
-  ingressDomain: #@ data.values.tap.domains.learningCenter
-  ingressSecret:
-    secretName: tls
-    server:
-      service_type: ClusterIP
-
 tap_gui:
   service_type: ClusterIP
-  ingressEnabled: "true"
-  ingressDomain: #@ data.values.tap.domains.main
-  tls:
-    namespace: tanzu-system-ingress
-    secretName: tls
   app_config:
     app:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
@@ -76,41 +64,16 @@ tap_gui:
             clientSecret: #@ data.values.tap.credentials.github.clientSecret
     #@ end
 
-metadata_store:
-  ns_for_export_app_cert: #@ data.values.tap.devNamespace
-  app_service_type: LoadBalancer
 
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
 
-contour:
-  envoy:
-    service:
-      type: LoadBalancer
-
-scanning:
-  app_service_type: LoadBalancer
-  ingress_enabled: true
-  ingress_domain: #@ data.values.tap.domains.main
-  metadataStore:
-    url: #@ data.values.tap.domains.metadataStore
-    caSecret:
-        name: store-ca-cert
-        importFromNamespace: metadata-store-secrets
-    authSecret:
-        name: store-auth-token
-        importFromNamespace: metadata-store-secrets
-
-cnrs:
-  domain_name: #@ data.values.tap.domains.knative
-  default_tls_secret: tanzu-system-ingress/tls
-  domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
-
 metadata_store:
   ingress_enabled: "true"
   ingress_domain: #@ data.values.tap.domains.main
   app_service_type: ClusterIP
+  ns_for_export_app_cert: #@ data.values.tap.devNamespace
 
 #@ end
 ---
