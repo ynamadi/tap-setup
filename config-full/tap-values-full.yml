@@ -79,7 +79,7 @@ tap_gui:
 metadata_store:
   ns_for_export_app_cert: #@ data.values.tap.devNamespace
   app_service_type: LoadBalancer
- 
+
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
@@ -90,6 +90,9 @@ contour:
       type: LoadBalancer
 
 scanning:
+  app_service_type: LoadBalancer
+  ingress_enabled: true
+  ingress_domain: #@ data.values.tap.domains.main
   metadataStore:
     url: #@ data.values.tap.domains.metadataStore
     caSecret:
