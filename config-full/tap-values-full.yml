@@ -23,13 +23,7 @@ ootb_supply_chain_basic:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
-#!    ssh_secret: ""
-    repository_prefix: #@ data.values.tap.supplychain.gitops.repo.prefix
-    branch: #@ data.values.tap.supplychain.gitops.repo.branch
-    user_name: #@ data.values.tap.supplychain.gitops.user.name
-    user_email: #@ data.values.tap.supplychain.gitops.user.email
-    commit_message: #@ data.values.tap.supplychain.gitops.repo.commit.message
-    ssh_secret: #@ data.values.tap.supplychain.gitops.secret
+    ssh_secret: ""
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
@@ -87,10 +81,6 @@ tap_gui:
             clientSecret: #@ data.values.tap.credentials.github.clientSecret
     #@ end
 
-metadata_store:
-  app_service_type: LoadBalancer
-  ns_for_export_app_cert: #@ data.values.tap.devNamespace
-
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
@@ -104,16 +94,6 @@ scanning:
     authSecret:
       name: store-auth-token
       importFromNamespace: metadata-store
-#!snyk-scanner:
-#!  namespace: #@ data.values.tap.devNamespace
-#!  targetImagePullSecret: "tap-registry"
-#!  tokenSecret:
-#!    name: snyk-api-token
-#!  metadataStore:
-#!    caSecret:
-#!      importFromNamespace: "" #! since both snyk and grype both enable store, one must leave importFromNamespace blank
-#!    authSecret:
-#!      importFromNamespace: "" #! since both snyk and grype both enable store, one must leave importFromNamespace blank
 
 contour:
   envoy:
@@ -137,6 +117,11 @@ appliveview_connector:
     #!host: #@ data.values.tap.domains.appliveview.host
     #!    port: #@ data.values.tap.domains.appliveview.port
     sslDisabled: "true"
+
+metadata_store:
+  ingress_enabled: "true"
+  ingress_domain: #@ data.values.tap.domains.main
+  app_service_type: ClusterIP
 #@ end
 ---
 apiVersion: v1

@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-
+#@ load("@ytt:yaml", "yaml")
 ---
 apiVersion: v1
 data: #@ data.values.tap.credentials.certificate
@@ -46,24 +46,24 @@ spec:
 #!          port: 7000
 #!
 #!---
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
-metadata:
-  name: app-live-view
-  namespace: app-live-view
-  annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tap-install/tap"
-spec:
-  virtualhost:
-    fqdn: #@ "app-live-view.{}".format(data.values.domain)
-    tls:
-      secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
-  routes:
-    - services:
-        - name: application-live-view-5112
-          port: 80
+#!apiVersion: projectcontour.io/v1
+#!kind: HTTPProxy
+#!metadata:
+#!  name: app-live-view
+#!  namespace: app-live-view
+#!  annotations:
+#!    kapp.k14s.io/change-rule: "upsert after upserting tap-install/tap"
+#!spec:
+#!  virtualhost:
+#!    fqdn: #@ "app-live-view.{}".format(data.values.domain)
+#!    tls:
+#!      secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
+#!  routes:
+#!    - services:
+#!        - name: application-live-view-5112
+#!          port: 80
 
----
+#!---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
