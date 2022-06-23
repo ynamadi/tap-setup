@@ -4,6 +4,9 @@
 ---
 #@ def config():
 profile: full
+#!excluded_packages:
+#!  - snyk.scanning.apps.tanzu.vmware.com
+#!  - fluxcd.source.controller.tanzu.vmware.com
 ceip_policy_disclosed: true
 buildservice:
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
@@ -101,6 +104,16 @@ scanning:
     authSecret:
       name: store-auth-token
       importFromNamespace: metadata-store
+#!snyk-scanner:
+#!  namespace: #@ data.values.tap.devNamespace
+#!  targetImagePullSecret: "tap-registry"
+#!  tokenSecret:
+#!    name: snyk-api-token
+#!  metadataStore:
+#!    caSecret:
+#!      importFromNamespace: "" #! since both snyk and grype both enable store, one must leave importFromNamespace blank
+#!    authSecret:
+#!      importFromNamespace: "" #! since both snyk and grype both enable store, one must leave importFromNamespace blank
 
 contour:
   envoy:
@@ -119,6 +132,11 @@ appliveview:
     namespace: tanzu-system-ingress
     secretName: tls
 
+appliveview_connector:
+  backend:
+    #!host: #@ data.values.tap.domains.appliveview.host
+    #!    port: #@ data.values.tap.domains.appliveview.port
+    sslDisabled: "true"
 #@ end
 ---
 apiVersion: v1
