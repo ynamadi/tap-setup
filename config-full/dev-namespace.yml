@@ -41,12 +41,28 @@ data:
   .dockerconfigjson: e30K
 ---
 apiVersion: v1
+kind: Secret
+metadata:
+  name: git-ssh
+  namespace: #@ data.values.tap.devNamespace
+  annotations:
+    tekton.dev/git-0: github.com
+type: kubernetes.io/ssh-auth
+data:
+  identity: #@ data.values.tap.credentials.gitops.identity
+  identity.pub: #@ data.values.tap.credentials.gitops.identity_pub
+  known_hosts: #@ data.values.tap.credentials.gitops.known_hosts
+  ssh-privatekey: #@ data.values.tap.credentials.gitops.identity
+---
+
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
   namespace: #@ data.values.tap.devNamespace
 secrets:
   - name: registry-credentials
+  - name: git-ssh
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry

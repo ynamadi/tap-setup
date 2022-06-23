@@ -19,6 +19,7 @@ spec:
       paths:
       - config
       - config-full
+      - config-proxy
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops

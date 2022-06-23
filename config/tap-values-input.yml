@@ -14,5 +14,5 @@ tap:
       ootbSupplyChain: repo/supply-chain
 
   domains:
-    main: tap.y-compiles.com
-    tapGui: tap-gui-build.tap.y-compiles.com
+    main: y-compiles.com
+    tapGui: tap-gui-build.y-compiles.com
