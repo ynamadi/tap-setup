@@ -120,8 +120,9 @@ appliveview_connector:
     sslDisabled: "true"
 
 metadata_store:
+  ns_for_export_app_cert: "*"
   ingress_enabled: "true"
-  ingress_domain: "y-compiles.com"
+  ingress_domain: #@ data.values.tap.domains.main
   app_service_type: ClusterIP
 #@ end
 ---
