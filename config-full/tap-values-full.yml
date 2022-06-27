@@ -121,7 +121,7 @@ appliveview_connector:
 
 metadata_store:
   ingress_enabled: "true"
-  ingress_domain: #@ data.values.tap.domains.main
+  ingress_domain: "y-compiles.com"
   app_service_type: ClusterIP
 #@ end
 ---
