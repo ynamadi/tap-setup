@@ -17,8 +17,8 @@ buildservice:
   descriptor_name: "full"
   enable_automatic_dependency_updates: true
 
-supply_chain: testing_scanning
-ootb_supply_chain_testing_scanning:
+supply_chain: basic
+ootb_supply_chain_basic:
   registry:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
