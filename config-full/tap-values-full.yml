@@ -30,6 +30,10 @@ ootb_supply_chain_testing_scanning:
       template: snyk-private-image-scan-template
       policy: scan-policy
 
+ootb_templates:
+  excluded_templates:
+    - "image-scanner-template"
+
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
   ingressSecret:
