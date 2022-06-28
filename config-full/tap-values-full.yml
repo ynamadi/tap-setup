@@ -45,6 +45,14 @@ tap_gui:
     namespace: tanzu-system-ingress
     secretName: tls
   app_config:
+    proxy:
+      /metadata-store:
+        target: https://metadata-store-app.metadata-store.svc.cluster.local:8443/api/v1
+        changeOrigin: true
+        secure: true
+        headers:
+          Authorization: #@ data.values.tap.metadataStore.accessToken
+          X-Custom-Source: project-star
     app:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
     integrations:
