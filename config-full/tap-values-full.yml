@@ -102,22 +102,12 @@ metadata_store:
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
-#!  snyk:
-#!    tokenSecret:
-#!      name: 328c4905-8466-46ba-ab44-a659a0894111
-#!
-#!snyk-scanner:
-#!  namespace: #@ data.values.tap.devNamespace
-#!  targetImagePullSecret: "tap-registry"
-#!  tokenSecret:
-#!    name: snyk-api-token
-#!  metadataStore:
-#!    caSecret:
-#!      name: store-ca-cert
-#!      importFromNamespace: metadata-store
-#!    authSecret:
-#!      name: store-auth-token
-#!      importFromNamespace: metadata-store
+  metadataStore:
+    url: "https://metadata-store-app.metadata-store.svc.cluster.local:8443"
+    clusterRole: metadata-store-read-write
+    caSecret:
+      name: app-tls-cert
+      importFromNamespace: metadata-store
 
 scanning:
   metadataStore:
