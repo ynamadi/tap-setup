@@ -24,7 +24,11 @@ ootb_supply_chain_testing_scanning:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
-    ssh_secret: ""
+    ssh_secret: git-ssh
+  scanning:
+    image:
+      template: sample-scan-policy
+      policy: scan-policy
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
@@ -81,10 +85,31 @@ tap_gui:
             clientId: #@ data.values.tap.credentials.github.clientId
             clientSecret: #@ data.values.tap.credentials.github.clientSecret
     #@ end
+metadata_store:
+  ns_for_export_app_cert: "*"
+  ingress_enabled: "true"
+  ingress_domain: #@ data.values.tap.domains.main
+  app_service_type: ClusterIP
 
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
+#!  snyk:
+#!    tokenSecret:
+#!      name: 328c4905-8466-46ba-ab44-a659a0894111
+#!
+#!snyk-scanner:
+#!  namespace: #@ data.values.tap.devNamespace
+#!  targetImagePullSecret: "tap-registry"
+#!  tokenSecret:
+#!    name: snyk-api-token
+#!  metadataStore:
+#!    caSecret:
+#!      name: store-ca-cert
+#!      importFromNamespace: metadata-store
+#!    authSecret:
+#!      name: store-auth-token
+#!      importFromNamespace: metadata-store
 
 scanning:
   metadataStore:
@@ -119,11 +144,6 @@ appliveview_connector:
     #!    port: #@ data.values.tap.domains.appliveview.port
     sslDisabled: "true"
 
-metadata_store:
-  ns_for_export_app_cert: "*"
-  ingress_enabled: "true"
-  ingress_domain: #@ data.values.tap.domains.main
-  app_service_type: ClusterIP
 #@ end
 ---
 apiVersion: v1
