@@ -27,7 +27,7 @@ ootb_supply_chain_testing_scanning:
     ssh_secret: git-ssh
   scanning:
     image:
-      template: private-image-scan-template
+      template: snyk-private-image-scan-template
       policy: scan-policy
 
 
