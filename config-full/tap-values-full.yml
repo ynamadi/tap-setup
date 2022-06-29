@@ -95,8 +95,10 @@ metadata_store:
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "tap-registry"
+  snyk:
+    tokenSecret:
+      name: snyk-secret
   metadataStore:
-    url: "https://metadata-store-app.metadata-store.svc.cluster.local:8443"
     clusterRole: metadata-store-read-write
     caSecret:
       name: app-tls-cert
