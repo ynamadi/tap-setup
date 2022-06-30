@@ -106,6 +106,7 @@ grype:
     tokenSecret:
       name: snyk-token-secret
   metadataStore:
+    url: " https://metadata-store.y-compiles.com:8443"
     caSecret:
       name: store-ca-cert
       importFromNamespace: metadata-store-secrets
