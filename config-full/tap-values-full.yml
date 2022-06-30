@@ -115,7 +115,7 @@ grype:
 
 scanning:
   metadataStore:
-    url: "https://metadata-store.y-compiles.com:8443"
+    url: ""
     caSecret:
       name: store-ca-cert
       importFromNamespace: metadata-store-secrets
