@@ -30,7 +30,6 @@ ootb_supply_chain_testing_scanning:
     repository_name: "tap-gitops"
     branch: "main"
     commit_strategy: pull_request
-    ssh_secret: git-https
     pull_request:
       server_kind: github
       commit_branch: ""
