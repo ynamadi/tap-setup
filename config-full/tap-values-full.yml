@@ -27,7 +27,7 @@ ootb_supply_chain_testing_scanning:
     ssh_secret: git-ssh
   scanning:
     image:
-      template: private-image-scan-template
+      template: snyk-private-image-scan-template
       policy: scan-policy
 
 learningcenter:
@@ -47,10 +47,9 @@ tap_gui:
   app_config:
     proxy:
       /metadata-store:
-        target: https://metadata-store-app.metadata-store.svc.cluster.local:8443/api/v1
+        target: https://metadata-store-app.metadata-store:8443/api/v1
         changeOrigin: true
-        secure: true
-        ca: #@ data.values.tap.credentials.metadataStore.caCert
+        secure: false
         headers:
           Authorization: #@ data.values.tap.credentials.metadataStore.accessToken
           X-Custom-Source: project-star
@@ -96,9 +95,9 @@ tap_gui:
     #@ end
 metadata_store:
   ns_for_export_app_cert: "*"
-  ingress_enabled: "false"
+  ingress_enabled: "true"
   ingress_domain: #@ data.values.tap.domains.main
-  app_service_type: ClusterIP
+  app_service_type: LoadBalancer
 
 grype:
   namespace: #@ data.values.tap.devNamespace
