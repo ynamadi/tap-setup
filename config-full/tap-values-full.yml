@@ -103,24 +103,24 @@ grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
   metadataStore:
-    url: https://metadata-store.y-compiles.com
+    url: "https://metadata-store.y-compiles.com"
     caSecret:
         name: store-ca-cert
-        importFromNamespace: metadata-store-secrets
+        importFromNamespace: metadata-store
     authSecret:
         name: store-auth-token
-        importFromNamespace: metadata-store-secrets
+        importFromNamespace: metadata-store
 
 scanning:
   metadataStore:
-    url: ""
+    url: "https://metadata-store.y-compiles.com"
     ns_for_export_app_cert: "*"
     caSecret:
       name: app-tls-cert
-      importFromNamespace: metadata-store-secrets
+      importFromNamespace: metadata-store
     authSecret:
       name: app-tls-cert
-      importFromNamespace: metadata-store-secrets
+      importFromNamespace: metadata-store
 
 contour:
   envoy:
