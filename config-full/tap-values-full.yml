@@ -49,9 +49,9 @@ tap_gui:
   app_config:
     proxy:
       /metadata-store:
-        target: https://metadata-store-app.metadata-store.svc.cluster.local:8443/api/v1
+        target: https://metadata-store-app.metadata-store:8443/api/v1
         changeOrigin: true
-        secure: true
+        secure: false
         headers:
           Authorization: #@ data.values.tap.credentials.metadataStore.accessToken
           X-Custom-Source: project-star
