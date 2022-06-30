@@ -112,7 +112,7 @@ metadata_store:
 
 grype:
   namespace: #@ data.values.tap.devNamespace
-  targetImagePullSecret: "registry-credentials"
+  targetImagePullSecret: "tap-registry"
   targetSourceSshSecret: "git-ssh"
   snyk:
     tokenSecret:
