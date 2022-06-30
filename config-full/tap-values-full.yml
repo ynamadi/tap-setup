@@ -131,10 +131,10 @@ scanning:
     url: ""
     ns_for_export_app_cert: "*"
     caSecret:
-      name: store-ca-cert
+      name: app-tls-cert
       importFromNamespace: metadata-store-secrets
     authSecret:
-      name: store-auth-token
+      name: app-tls-cert
       importFromNamespace: metadata-store-secrets
 
 contour:
