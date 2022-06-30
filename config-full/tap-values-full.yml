@@ -105,13 +105,6 @@ grype:
   snyk:
     tokenSecret:
       name: snyk-token-secret
-  metadataStore:
-    caSecret:
-      name: store-ca-cert
-      importFromNamespace: metadata-store-secrets
-    authSecret:
-      name: store-auth-token
-      importFromNamespace: metadata-store-secrets
 
 scanning:
   metadataStore:
@@ -123,7 +116,7 @@ scanning:
     authSecret:
       name: app-tls-cert
       importFromNamespace: metadata-store-secrets
-      
+
 contour:
   envoy:
     service:
