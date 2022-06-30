@@ -102,6 +102,14 @@ metadata_store:
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
+  metadataStore:
+    url: https://metadata-store.y-compiles.com
+    caSecret:
+        name: store-ca-cert
+        importFromNamespace: metadata-store-secrets
+    authSecret:
+        name: store-auth-token
+        importFromNamespace: metadata-store-secrets
 
 scanning:
   metadataStore:
