@@ -103,15 +103,18 @@ metadata_store:
 
 grype:
   namespace: #@ data.values.tap.devNamespace
-  targetImagePullSecret: "tap-registry"
+  targetImagePullSecret: "registry-credentials"
   snyk:
     tokenSecret:
-      name: snyk-secret
+      name: snyk-token-secret
   metadataStore:
     clusterRole: metadata-store-read-write
     caSecret:
       name: app-tls-cert
-      importFromNamespace: metadata-store
+      importFromNamespace: metadata-store-secrets
+    authSecret:
+      name: app-tls-cert
+      importFromNamespace: metadata-store-secrets
 
 scanning:
   metadataStore:
