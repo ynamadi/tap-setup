@@ -109,7 +109,7 @@ metadata_store:
   ns_for_export_app_cert: "*"
   ingress_enabled: "true"
   ingress_domain: #@ data.values.tap.domains.main
-  app_service_type: LoadBalancer
+  app_service_type: ClusterIP
 
 grype:
   namespace: #@ data.values.tap.devNamespace
