@@ -27,7 +27,7 @@ ootb_supply_chain_testing_scanning:
     ssh_secret: git-ssh
   scanning:
     image:
-      template: snyk-private-image-scan-template
+      template: private-image-scan-template
       policy: scan-policy
 
 learningcenter:
@@ -101,10 +101,7 @@ metadata_store:
 
 grype:
   namespace: #@ data.values.tap.devNamespace
-  targetImagePullSecret: "tap-registry"
-  snyk:
-    tokenSecret:
-      name: snyk-token-secret
+  targetImagePullSecret: "registry-credentials"
 
 scanning:
   metadataStore:
