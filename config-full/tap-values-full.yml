@@ -129,12 +129,11 @@ scanning:
     url: ""
     ns_for_export_app_cert: "*"
     caSecret:
-      name: app-tls-cert
-      importFromNamespace: metadata-store-secrets
+        name: store-ca-cert
+        importFromNamespace: metadata-store-secrets
     authSecret:
-      name: app-tls-cert
-      importFromNamespace: metadata-store-secrets
-
+        name: store-auth-token
+        importFromNamespace: metadata-store-secrets
 contour:
   envoy:
     service:
