@@ -119,11 +119,11 @@ scanning:
   metadataStore:
     url: ""
     caSecret:
-      name: store-ca-cert
-      importFromNamespace: metadata-store
+      name: app-tls-cert
+      importFromNamespace: metadata-store-secrets
     authSecret:
-      name: store-auth-token
-      importFromNamespace: metadata-store
+      name: app-tls-cert
+      importFromNamespace: metadata-store-secrets
 
 contour:
   envoy:
