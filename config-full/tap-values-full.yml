@@ -94,7 +94,8 @@ tap_gui:
             clientSecret: #@ data.values.tap.credentials.github.clientSecret
     #@ end
 metadata_store:
-  ingress_enabled: "true"
+  ns_for_export_app_cert: "*"
+  ingress_enabled: "false"
   ingress_domain: #@ data.values.tap.domains.main
   app_service_type: ClusterIP
 
