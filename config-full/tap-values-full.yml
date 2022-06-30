@@ -116,10 +116,10 @@ scanning:
     url: "https://metadata-store.y-compiles.com"
     ns_for_export_app_cert: "*"
     caSecret:
-      name: app-tls-cert
+      name: store-ca-cert
       importFromNamespace: metadata-store
     authSecret:
-      name: app-tls-cert
+      name: store-auth-token
       importFromNamespace: metadata-store
 
 contour:
