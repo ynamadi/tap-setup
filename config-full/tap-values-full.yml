@@ -50,7 +50,6 @@ tap_gui:
         target: https://metadata-store-app.metadata-store:8443/api/v1
         changeOrigin: true
         secure: false
-        ca: | #@ data.values.tap.credentials.metadataStore.caCert
         headers:
           Authorization: #@ data.values.tap.credentials.metadataStore.accessToken
           X-Custom-Source: project-star
