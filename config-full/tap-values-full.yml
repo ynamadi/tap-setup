@@ -47,7 +47,7 @@ tap_gui:
   app_config:
     proxy:
       /metadata-store:
-        target: https://metadata-store.y-compiles.com
+        target: https://metadata-store.y-compiles.com/api/
         changeOrigin: true
         secure: true
         ca: | #@ data.values.tap.credentials.metadataStore.caCert
@@ -98,6 +98,8 @@ metadata_store:
   ns_for_export_app_cert: "*"
   ingress_enabled: "true"
   ingress_domain: #@ data.values.tap.domains.main
+  ingressSecret:
+    secretName: tls
 
 grype:
   namespace: #@ data.values.tap.devNamespace
