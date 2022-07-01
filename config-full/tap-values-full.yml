@@ -104,10 +104,10 @@ grype:
   metadataStore:
     url: "https://metadata-store.y-compiles.com"
     caSecret:
-        name: store-ca-cert
+        name: ingress-cert
         importFromNamespace: metadata-store
     authSecret:
-        name: store-auth-token
+        name: metadata-store-read-client
         importFromNamespace: metadata-store
 
 scanning:
@@ -115,10 +115,10 @@ scanning:
     url: ""
     ns_for_export_app_cert: "*"
     caSecret:
-      name: store-ca-cert
+      name: ingress-cert
       importFromNamespace: metadata-store
     authSecret:
-      name: store-auth-token
+      name: metadata-store-read-client
       importFromNamespace: metadata-store
 
 contour:
