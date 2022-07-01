@@ -112,7 +112,7 @@ grype:
 
 scanning:
   metadataStore:
-    url: "https://metadata-store.y-compiles.com"
+    url: ""
     ns_for_export_app_cert: "*"
     caSecret:
       name: store-ca-cert
