@@ -10,8 +10,8 @@ tap:
   registry:
     host: harbor.tanzu.projectscions.com
     repositories:
-      buildService: repo/build-service
-      ootbSupplyChain: repo/supply-chain
+      buildService: tap/build-service
+      ootbSupplyChain: tap/supply-chain
 
   domains:
     main: projectscions.com
