@@ -1,4 +1,4 @@
-namespace: tap-dev
+namespace: dev-ns
 targetImagePullSecret: "registry-credentials"
 snyk:
   tokenSecret:

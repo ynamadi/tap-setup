@@ -2,7 +2,7 @@ apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
 metadata:
   name: scan-policy
-  namespace: tap-dev
+  namespace: dev-ns
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=spring-sensors'
 spec:

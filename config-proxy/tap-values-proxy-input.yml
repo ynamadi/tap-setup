@@ -3,13 +3,13 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 tap:
-  devNamespace: tap-dev
+  devNamespace: dev-ns
 
   domains:
-    learningCenter: learningcenter.y-compiles.com
-    knative: apps.y-compiles.com
+    learningCenter: learningcenter.projectscions.com
+    knative: apps.projectscions.com
 
-domain: y-compiles.com
+domain: projectscions.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress

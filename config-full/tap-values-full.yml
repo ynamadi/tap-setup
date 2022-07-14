@@ -104,7 +104,7 @@ grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
   metadataStore:
-    url: "https://metadata-store.y-compiles.com"
+    url: "https://metadata-store.projectscions.com"
 
 scanning:
   metadataStore:

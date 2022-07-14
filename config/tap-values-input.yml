@@ -8,11 +8,11 @@ tap:
   catalogs: []
 
   registry:
-    host: tapbuild.azurecr.io
+    host: harbor.tanzu.projectscions.com
     repositories:
       buildService: repo/build-service
       ootbSupplyChain: repo/supply-chain
 
   domains:
-    main: y-compiles.com
-    tapGui: tap-gui.y-compiles.com
+    main: projectscions.com
+    tapGui: tap-gui.projectscions.com
