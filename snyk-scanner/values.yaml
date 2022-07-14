@@ -1,0 +1,10 @@
+namespace: tap-dev
+targetImagePullSecret: "registry-credentials"
+snyk:
+  tokenSecret:
+    name: snyk-token-secret
+metadataStore:
+  caSecret:
+    importFromNamespace: ""
+  authSecret:
+    importFromNamespace: ""
