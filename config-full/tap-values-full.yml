@@ -9,7 +9,7 @@ profile: full
 #!  - fluxcd.source.controller.tanzu.vmware.com
 ceip_policy_disclosed: true
 buildservice:
-  kp_default_repository: "harbor.tanzu.projectscions.com/tap/build-service"
+  kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
   tanzunet_username: #@ data.values.tap.credentials.tanzuNet.username
