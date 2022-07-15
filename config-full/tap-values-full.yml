@@ -25,6 +25,11 @@ ootb_supply_chain_basic:
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
     ssh_secret: git-ssh
+  git_implementation: libgit2
+  maven:
+    repository:
+      url: #@ data.values.tap.maven.url
+      secret_name: maven-secret
   scanning:
     image:
       template: private-image-scan-template
