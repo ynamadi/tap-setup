@@ -6,7 +6,7 @@ tap:
   devNamespace: dev-ns
 
   domains:
-    learningCenter: learningcenter.projectscions.com
+    learningCenter: learningcenter.tanzu.projectscions.com
     knative: apps.projectscions.com
 
 domain: projectscions.com

@@ -6,13 +6,13 @@ tap:
   devNamespace: dev-ns
 
   domains:
-    learningCenter: learningcenter.projectscions.com
+    learningCenter: learningcenter.tanzu.projectscions.com
     knative: apps.projectscions.com
     appliveview:
-          host: appliveview.projectscions.com
+          host: appliveview.tanzu.projectscions.com
           port: 443
 
-domain: projectscions.com
+domain: tanzu.projectscions.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress

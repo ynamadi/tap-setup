@@ -109,7 +109,7 @@ grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
   metadataStore:
-    url: "https://metadata-store.projectscions.com"
+    url: "https://metadata-store.tanzu.projectscions.com"
 
 scanning:
   metadataStore:
