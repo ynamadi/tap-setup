@@ -9,7 +9,7 @@ tap:
     learningCenter: learningcenter.tanzu.projectscions.com
     knative: apps.projectscions.com
 
-domain: projectscions.com
+domain: tanzu.projectscions.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
