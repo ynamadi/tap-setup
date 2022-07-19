@@ -21,3 +21,5 @@
 /tanzu-cluster-essentials/
 /tanzu-cluster-essentials/
 tanzu-cluster-essentials/bundle/.imgpkg/images.yml
+/gitops/tap-install-config.yml
+/gitops/tap-install-secrets.yml
