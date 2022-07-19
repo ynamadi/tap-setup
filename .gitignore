@@ -13,8 +13,8 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-/gitops/tap-install-config.yml
-/gitops/tap-install-secrets.yml
+/gitops/tap-install-config.yml.tmp
+/gitops/tap-install-secrets.yml.tmp
 /cluster-essentials.sh
 /eks-cluster-setup.sh
 /.idea/

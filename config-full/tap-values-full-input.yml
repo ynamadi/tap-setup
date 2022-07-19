@@ -6,13 +6,13 @@ tap:
   devNamespace: tap-dev
 
   domains:
-    learningCenter: learningcenter.y-compiles.com
-    knative: apps.y-compiles.com
+    learningCenter: learningcenter.tanzu.y-compiles.com
+    knative: apps.tanzu.y-compiles.com
     appliveview:
-          host: appliveview.y-compiles.com
+          host: appliveview.tanzu.y-compiles.com
           port: 443
 
-domain: y-compiles.com
+domain: tanzu.y-compiles.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
