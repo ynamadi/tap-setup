@@ -23,8 +23,7 @@ ootb_supply_chain_testing_scanning:
   registry:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
-  gitops:
-    ssh_secret: git-ssh
+
   scanning:
     image:
       template: snyk-private-image-scan-template
