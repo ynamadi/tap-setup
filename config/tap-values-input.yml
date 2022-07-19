@@ -14,5 +14,5 @@ tap:
       ootbSupplyChain: tap/supply-chain
 
   domains:
-    main: tanzu.projectscions.com
-    tapGui: tap-gui.tanzu.projectscions.com
+    main: tap.tanzu.projectscions.com
+    tapGui: tap-gui.tap.tanzu.projectscions.com
