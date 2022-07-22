@@ -2,14 +2,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: tap-install-gitops
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tanzu-system-ingress
-
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: learningcenter
