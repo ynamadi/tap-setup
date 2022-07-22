@@ -46,7 +46,7 @@ tap_gui:
     secretName: tls
   app_config:
     organization:
-      name: 'Y-Compiles LLC'
+      name: 'Y-Compiles LLC222'
     proxy:
       /metadata-store:
         target: https://metadata-store-app.metadata-store:8443/api/v1
