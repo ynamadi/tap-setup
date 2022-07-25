@@ -1,5 +1,3 @@
-#@data/values
-#@overlay/match-child-defaults missing_ok=True
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml")
 ---
