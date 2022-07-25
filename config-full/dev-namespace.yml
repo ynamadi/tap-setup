@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
 #@ load("@ytt:base64", "base64")
 #@ load("@ytt:json", "json")
 
