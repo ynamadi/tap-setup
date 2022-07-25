@@ -1,17 +1,15 @@
 #@data/values
-#@ load("@ytt:data", "data")
-#@ load("@ytt:yaml", "yaml")
 
 #@overlay/match-child-defaults missing_ok=True
 ---
 tap:
-  devNamespace: #@ data.values.tap.devNamespace
+  devNamespace: tap-dev
 
   domains:
-    learningCenter: #@ data.values.tap.domains.learningCenter
-    knative: #@ data.values.tap.domains.knative
+    learningCenter: learningcenter.tanzu.y-compiles.com
+    knative: apps.tanzu.y-compiles.com
 
-domain: #@ data.values.tap.domains.main
+domain: tanzu.y-compiles.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
