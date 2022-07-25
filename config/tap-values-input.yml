@@ -3,7 +3,7 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 tap:
-  version: "1.2.0"
+  version: "1.2.1-build.3"
   namespace: tap-install
   catalogs: []
 
