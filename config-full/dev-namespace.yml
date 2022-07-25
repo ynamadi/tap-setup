@@ -1,8 +1,8 @@
 #@ load("@ytt:data", "data")
-#@ load("@ytt:yaml", "yaml")
 #@ load("@ytt:base64", "base64")
 #@ load("@ytt:json", "json")
 
+#@ if data.values.tap.devNamespace != "default" and data.values.tap.devNamespace != "":
 ---
 apiVersion: v1
 kind: Namespace
@@ -112,3 +112,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
+#@ end

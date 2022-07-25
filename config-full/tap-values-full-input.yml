@@ -2,16 +2,16 @@
 #@ load("@ytt:yaml", "yaml")
 ---
 tap:
-  devNamespace: #@ data.values.tap.devNamespace
+  devNamespace: tap-dev
 
   domains:
-    learningCenter: #@ data.values.tap.domains.learningCenter
-    knative: #@ data.values.tap.domains.knative
+    learningCenter: learningcenter.tanzu.y-compiles.com
+    knative: apps.tanzu.y-compiles.com
     appliveview:
-          host: #@ data.values.tap.domains.appliveview
+          host: appliveview.tanzu.y-compiles.com
           port: 443
 
-domain: #@ data.values.tap.domains.main
+domain: tanzu.y-compiles.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
