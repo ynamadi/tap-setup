@@ -1,7 +1,8 @@
 #@data/values
-#@overlay/match-child-defaults missing_ok=True
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml")
+
+#@overlay/match-child-defaults missing_ok=True
 ---
 tap:
   devNamespace: #@ data.values.tap.devNamespace
@@ -9,9 +10,6 @@ tap:
   domains:
     learningCenter: #@ data.values.tap.domains.learningCenter
     knative: #@ data.values.tap.domains.knative
-    appliveview:
-          host: #@ data.values.tap.domains.appliveview
-          port: 443
 
 domain: #@ data.values.tap.domains.main
 tls:
