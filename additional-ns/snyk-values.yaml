@@ -1,0 +1,11 @@
+namespace: tap-stage
+targetImagePullSecret: "registry-credentials"
+snyk:
+  tokenSecret:
+    name: snyk-token-secret
+metadataStore:
+  url: "https://metadata-store.tanzu.y-compiles.com"
+  caSecret:
+    importFromNamespace: ""
+  authSecret:
+    importFromNamespace: ""
