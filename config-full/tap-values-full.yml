@@ -21,7 +21,14 @@ ootb_supply_chain_testing_scanning:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
+    email: supplychain@cluster.local
     ssh_secret: git-ssh
+    commit_strategy: pull_request
+    pull_request:
+      server_kind: github
+      pull_request_title: "Approval for Production deployment"
+      pull_request_body: "Please review the configuration and approve the deployment to production"
+      commit_branch: main
   scanning:
     image:
       template: snyk-private-image-scan-template
