@@ -21,7 +21,8 @@ ootb_supply_chain_testing_scanning:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
-    email: supplychain@cluster.local
+    user_name: ynamadi
+    user_email: supplychain@cluster.local
     commit_strategy: pull_request
     pull_request:
       server_kind: github
