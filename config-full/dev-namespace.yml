@@ -47,6 +47,7 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
 secrets:
   - name: registry-credentials
+  - name: git-ssh
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry
