@@ -22,7 +22,7 @@ ootb_supply_chain_testing_scanning:
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
     server_address: "https://github.com/"
-    ssh_secret: git-ssh
+    ssh_secret: gitops-ssh
     user_email: supplychain@cluster.local
     commit_strategy: pull_request
     pull_request:
