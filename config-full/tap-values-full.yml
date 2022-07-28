@@ -25,7 +25,7 @@ ootb_supply_chain_testing_scanning:
     repository_owner: ynamadi
     branch: main
     commit_message: supplychain@cluster.local
-    ssh_secret: gitops-ssh
+    ssh_secret: git-ssh
     commit_strategy: pull_request
     pull_request:
       server_kind: github
