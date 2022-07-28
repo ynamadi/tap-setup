@@ -50,6 +50,7 @@ secrets:
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry
+  - name: gitops-ssh
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role

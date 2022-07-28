@@ -24,8 +24,6 @@ ootb_supply_chain_testing_scanning:
     server_address: https://github.com/
     repository_owner: ynamadi
     branch: main
-    user_name: supplychain
-    user_email: supplychain
     commit_message: supplychain@cluster.local
     ssh_secret: gitops-ssh
     commit_strategy: pull_request
