@@ -21,6 +21,7 @@ ootb_supply_chain_testing_scanning:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
+    username: "ynamadi"
     server_address: "https://github.com/"
     repository_owner: "ynamadi"
     branch: "main"
