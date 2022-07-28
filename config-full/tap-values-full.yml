@@ -22,6 +22,8 @@ ootb_supply_chain_testing_scanning:
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
     server_address: "https://github.com/"
+    repository_owner: "ynamadi"
+    branch: "main"
     ssh_secret: gitops-ssh
     user_email: supplychain@cluster.local
     commit_strategy: pull_request
