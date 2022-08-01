@@ -50,6 +50,8 @@ kind: ScanPolicy
 metadata:
   name: snyk-scan-policy
   namespace: #@ data.values.tap.devNamespace
+  labels:
+    'app.kubernetes.io/part-of': 'component-a'
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=component-a'
 spec:
