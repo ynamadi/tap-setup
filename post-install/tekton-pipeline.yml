@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: tekton-pipeline
-  namespace: #@ data.values.tap.namespace
+  namespace: #@ data.values.tap.devNamespace
   labels:
     apps.tanzu.vmware.com/pipeline: test
 spec:
