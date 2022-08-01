@@ -1,7 +1,9 @@
+#@ load("@ytt:data", "data")
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: tekton-pipeline
+  namespace: #@ data.values.tap.namespace
   labels:
     apps.tanzu.vmware.com/pipeline: test
 spec:
@@ -56,12 +58,35 @@ spec:
           - name: source-revision
         steps:
           - name: test
-            image: maven:3-openjdk-11
+            image: gradle
             script: |-
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
-              mvn test
-    - name: test-npm
+              ./mvnw test
+    - name: gradle-test
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      when:
+      - input: "$(tasks.check-build-tool.results.build-tool)"
+        operator: in
+        values: ["gradle"]
+      runAfter:
+        - check-build-tool
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: test
+            image: gradle
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+              ./gradlew test
+    - name: npm-test
       params:
         - name: source-url
           value: $(params.source-url)

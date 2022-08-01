@@ -49,11 +49,6 @@ tap_gui:
     namespace: tanzu-system-ingress
     secretName: tls
   app_config:
-    customize:
-      custom_logo: #@ data.values.tap.credentials.customize.custom_logo
-      custom_name: #@ data.values.tap.credentials.customize.custom_name
-    organization:
-      name: #@ data.values.tap.credentials.customize.org_name
     proxy:
       /metadata-store:
         target: https://metadata-store-app.metadata-store:8443/api/v1
