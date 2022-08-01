@@ -9,7 +9,7 @@ tap:
     learningCenter: learningcenter.tanzu.y-compiles.com
     knative: apps.tanzu.y-compiles.com
 
-domain: y-compiles.com
+domain: tanzu.y-compiles.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
