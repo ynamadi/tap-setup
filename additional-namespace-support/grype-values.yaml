@@ -1,4 +1,4 @@
-namespace: tap-stage
+namespace: tap-live
 targetImagePullSecret: "registry-credentials"
 metadataStore:
   url: "https://metadata-store.tanzu.y-compiles.com"

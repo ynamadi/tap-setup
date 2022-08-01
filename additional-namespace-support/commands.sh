@@ -1,11 +1,13 @@
 export EXISTING_NAMESPACE="tap-dev"
-export NAMESPACE="tap-prod"
+export NAMESPACE="tap-live"
 
 kubectl create ns ${NAMESPACE}
 kubectl get secret registry-credentials --namespace=${EXISTING_NAMESPACE} -o yaml | sed 's/namespace: .*/namespace: '${NAMESPACE}'/' | kubectl apply -f -
 kubectl get secret tap-registry --namespace=${EXISTING_NAMESPACE} -o yaml | sed 's/namespace: .*/namespace: '${NAMESPACE}'/' | kubectl apply -f -
 
-kubectl apply -f scan-policy.yaml -n ${NAMESPACE}
+kubectl get scanpolicy scan-policy --namespace=${EXISTING_NAMESPACE} -o yaml | sed 's/namespace: .*/namespace: '${NAMESPACE}'/' | kubectl apply -f -
+kubectl get scanpolicy snyk-scan-policy --namespace=${EXISTING_NAMESPACE} -o yaml | sed 's/namespace: .*/namespace: '${NAMESPACE}'/' | kubectl apply -f -
+
 
 # Make sure you apply any git-secrets and pipeline
 cat <<EOF | kubectl -n ${NAMESPACE} apply -f -
