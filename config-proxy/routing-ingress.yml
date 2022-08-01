@@ -1,5 +1,12 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml")
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: learning-center-guided-ui
+
 ---
 apiVersion: v1
 data: #@ data.values.tap.credentials.certificate
