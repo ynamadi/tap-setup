@@ -23,6 +23,26 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
+  name: snyk-token-secret
+  namespace: #@ data.values.tap.devNamespace
+data:
+  snyk_token: #@ data.values.tap.credentials.snyk.token
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-ssh
+  namespace: #@ data.values.tap.devNamespace
+  annotations:
+    tekton.dev/git-0: https://github.com
+type: kubernetes.io/basic-auth
+stringData:
+  username: #@ data.values.tap.credentials.github.username
+  password: #@ data.values.tap.credentials.github.token
+---
+apiVersion: v1
+kind: Secret
+metadata:
   name: registry-credentials
   namespace: #@ data.values.tap.devNamespace
 type: kubernetes.io/dockerconfigjson
@@ -48,11 +68,9 @@ metadata:
 secrets:
   - name: registry-credentials
   - name: git-ssh
-  - name: git-ssh-devops
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry
-  - name: git-ssh
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
