@@ -23,12 +23,18 @@ Make sure [Cluster Essentials for VMware Tanzu is deployed to your cluster](http
 You don't need to use the `tanzu` CLI to apply the configuration with a GitOps approach:
 all `tanzu` commands described in the documentation have been integrated as YAML definitions.
 
-Create new file `tap-install-config.yml` in `gitops`, reusing content from [`tap-install-config.yml.tpl`](gitops/tap-install-config.yml).
+####Step 1 -  Remove **config-proxy** and **post-install** scripts from the initial install
+**Note:** 
+- _In **gitops/tap-install.yml** remove **- config-proxy** and **- post-install** from template.ytt.paths and push to github._ 
+- _During the installation there is a pre-check that happens for Contour resources in order to apply the proxy configuration, since contour is not available yet, we will need to wait for it to be installed before we can apply the proxy configurations._
+
+
+####Step 2 - Create new file `tap-install-config.yml` in `gitops`, reusing content from [`tap-install-config.yml.tpl`](gitops/tap-install-config.yml.tmp).
+
 Edit this file accordingly:
 
-In your gitops folder create tap-install-config.yml file with the following content below:
-
-````yaml
+_In your gitops folder create tap-install-config.yml file with the following content below:_
+```yaml
 #@ load("@ytt:yaml", "yaml")
 ---
 #@ def config():
@@ -37,19 +43,21 @@ tap:
   catalogs:
   - https://github.com/tanzu-corp/tap-catalog/blob/main/catalog-info.yaml
 
-  #! Replace ${REGISTRY_HOST} with your container registry host.
   registry:
     host: ${REGISTRY_HOST}
     repositories:
       buildService: tanzu/tanzu-build-service
       ootbSupplyChain: tanzu/tanzu-supply-chain
 
-  #! Replace example.com with your domain.
   domains:
-    main: apps.example.com
-    tapGui: tap-gui.apps.example.com
-    learningCenter: learningcenter.apps.example.com
-    knative: apps.example.com
+    main: tanzu.example.com
+    tapGui: tap-gui.tanzu.example.com
+    learningCenter: learningcenter.tanzu.example.com
+    knative: apps.tanzu.example.com
+    appliveview: appliveview.tanzu.example.com
+    metadataStore: metadata-store.tanzu.example.com
+  maven:
+    url: ${ARTIFACTORY_URL}
 #@ end
 ---
 apiVersion: v1
@@ -59,10 +67,15 @@ metadata:
   namespace: tap-install-gitops
 data:
   tap-config.yml: #@ yaml.encode(config())
-````
+```
 
-In your gitops folder create tap-install-secrets.yml file with the following content below:
+####Step 3 - In your GitOps folder create tap-install-secrets.yml file with the following content below:
+Edit this file accordingly:
+
+_In your gitops folder create tap-install-secrets.yml file with the following content below:_
+
 ```yaml
+
 #@ load("@ytt:yaml", "yaml")
 ---
 #@ def config():
@@ -75,30 +88,39 @@ tap:
       password: ${TANZUNET_PASSWORD}
 
     registry:
-      username: ${CONTAINER_REGISTRY_USERNAME}
-      password: ${CONTAINER_REGISTRY_PASSWORD}
+      username: ${REGISTRY_USERNAME}
+      password: ${REGISTRY_PASSWORD}
     #! Remove suffix "-disabled" to enable GitHub integration:
     #! - set clientId and clientSecret to enable authentication,
     #! - set token to download resources from GitHub (such as Backstage catalogs).
     github:
-      clientId: ${GITHUB_OAUTH_APP_CLIENT_ID}
-      clientSecret: ${GITHUB_OAUTH_APP_CLIENT_SECRET}
-      token: ${GITHUB_AUTH_TOKEN}
+      username: ${GITHUB_USERNAME}
+      clientId: ${GITHUB_APP_CLIENT_ID}
+      clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+      token: ${GITHUB_ACCESS_TOKEN}
+
+    snyk:
+      token: ${SNYK_ACCESS_TOKEN}
+
+    customize:
+      custom_logo: ${BASE64_LOGO}
+      custom_name: ${COMPANY_NAME}
+      org_name: ${ORG_NAME}
 
     certificate:
-      tls.crt: ${BASE64_ENCODED_CERT}
-      tls.key: ${BASE64_ENCODED_KEY}
+      tls.crt: ${BASE64_CERT}
+      tls.key: ${BASE64_KEY}
 
     metadataStore:
-      accessToken: "Bearer ${METADATA_STORE_ACCESS_TOKEN}"
+      accessToken: "Bearer ${METADATA_ACCESS_TOKEN}"
     #! Remove suffix "-disabled" to enable Backstage persistence.
     backstage-disabled:
       database:
         client: pg
-        host: ${DB_HOST}
-        port: ${DB_PORT}
-        username: ${DB_USERNAME}
-        password: ${DB_PASSWORD}
+        host: INSERT-DB-HOST
+        port: 5432
+        username: INSERT-DB-USERNAME
+        password: INSERT-DB-PASSWORD
 #@ end
 ---
 apiVersion: v1
@@ -108,7 +130,7 @@ metadata:
   namespace: tap-install-gitops
 stringData:
   username: github
-  password: ${GITHUB_AUTH_TOKEN}
+  password: ${GITHUB_ACCESS_TOKEN}
 ---
 apiVersion: v1
 kind: Secret
@@ -119,35 +141,53 @@ stringData:
   tap-secrets.yml: #@ yaml.encode(config())
 ```
 
-For the initial installation we need to remove - config-proxy from gitops/tap-install.yml file. 
-
-During the installation there is a pre-check that happens for Contour resources in order to apply the proxy configuration, since contour is not available yet, we will need to wait for it to be installed before we can apply the proxy configurations.
-
-
-
-
-# tap-setup
-Full installation for Tanzu Application Platform
-
+####Step 4 - Deploy the kapp Application
 ```shell
 kapp deploy -a tap-install-gitops -f <(ytt -f gitops)
+```
 
-kubectl get svc -n tanzu-system-ingress
+####Step 5 - Check to make sure the Tanzu packages have started Reconciling. 
+```shell
+tanzu package installed list -n tap-install
+```
+
+####Step 6 - Add **config-proxy** and **post-install** scripts to gitops/tap-install.yml
+**Note:**
+- _Navigate to **gitops/tap-install.yml** add **- config-proxy** and **- post-install** to template.ytt.paths and push to github._
+
+```yaml
+  template:
+  - ytt:
+      paths:
+      - config
+      - config-full
+      - config-proxy
+      - post-install
+```
+
+####Step 7 - ReDeploy the kapp Application
+```shell
+kapp deploy -a tap-install-gitops -f <(ytt -f gitops)
+```
+
+####Step 8 - Retrieve Metadata Store Access Token and update gitops/tap-install-secrets.yml
+```shell
+export METADATA_STORE_ACCESS_TOKEN=$(kubectl get secrets -n metadata-store -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='metadata-store-read-client')].data.token}" | base64 -d)
+```
+
+Example:
+```yaml
+metadataStore:
+      accessToken: "Bearer ${METADATA_STORE_ACCESS_TOKEN}"
+```
+
+
+####Step 9 - Retrieve External IP Address and Update your DNS
+```shell
+kubectl get service envoy -n tanzu-system-ingress
 ```
 
 As a part of the Out-Of-The-Box Supply Chain with Testing and Scanning you will need to create a ScanPolicy object in the developer namespace. The ScanPolicy defines a set of rules to evaluate for a particular scan to consider the artifacts (image or source code) either compliant or not 
 
 
 For more information visit [ScanPolicy](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.2/tap/GUID-scc-ootb-supply-chain-testing-scanning.html#scan-policy)
-
-
-Apply Scan policy that will be used for source and image scanning: 
-
-```shell
-kubectl create -f ootb_testing_scanning/scan-policy.yaml
-```
-
-
-```shell
-export METADATA_STORE_ACCESS_TOKEN=$(kubectl get secrets -n metadata-store -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='metadata-store-read-client')].data.token}" | base64 -d)
-```
