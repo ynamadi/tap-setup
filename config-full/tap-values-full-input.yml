@@ -12,7 +12,7 @@ tap:
           host: appliveview.tanzu.y-compiles.com
           port: 443
 
-domain: y-compiles.com
+domain: tanzu.y-compiles.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
