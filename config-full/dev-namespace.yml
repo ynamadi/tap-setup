@@ -39,18 +39,6 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: git-ssh
-  namespace: #@ data.values.tap.devNamespace
-  annotations:
-    tekton.dev/git-0: https://github.com
-type: kubernetes.io/basic-auth
-stringData:
-  username: #@ data.values.tap.credentials.github.username
-  password: #@ data.values.tap.credentials.github.token
----
-apiVersion: v1
-kind: Secret
-metadata:
   name: registry-credentials
   namespace: #@ data.values.tap.devNamespace
 type: kubernetes.io/dockerconfigjson
