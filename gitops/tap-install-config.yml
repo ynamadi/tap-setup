@@ -1,0 +1,28 @@
+#@ load("@ytt:yaml", "yaml")
+---
+#@ def config():
+tap:
+
+  registry:
+    host: harbor.tanzu.projectscions.com
+    repositories:
+      buildService: tap/tanzu-build-service
+      ootbSupplyChain: tap/tanzu-supply-chain
+
+  domains:
+    main: tap.tanzu.projectscions.com
+    tapGui: tap-gui.tap.tanzu.projectscions.com
+    learningCenter: learningcenter.tap.tanzu.projectscions.com
+    knative: apps.tap.tanzu.projectscions.com
+    metadataStore: metadata-store.tap.tanzu.projectscions.com
+  maven:
+    url: "http://acf751aab6dd740249a2bb15c7fae453-573253837.us-east-2.elb.amazonaws.com:8081/repository/SmcMavenDev"
+#@ end
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tap-install-gitops
+  namespace: tap-install-gitops
+data:
+  tap-config.yml: #@ yaml.encode(config())

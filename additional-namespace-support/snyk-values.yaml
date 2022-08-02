@@ -1,10 +1,10 @@
-namespace: dev-ns
+namespace: prod-ns
 targetImagePullSecret: "registry-credentials"
 snyk:
   tokenSecret:
     name: snyk-token-secret
 metadataStore:
-  url: "https://metadata-store.tanzu.y-compiles.com"
+  url: "https://metadata-store.tap.tanzu.projectscions.com"
   caSecret:
     importFromNamespace: ""
   authSecret:

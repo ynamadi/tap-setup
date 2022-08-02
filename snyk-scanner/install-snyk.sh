@@ -1,0 +1,1 @@
+tanzu package install snyk-scanner --package-name snyk.scanning.apps.tanzu.vmware.com --version 1.0.0-beta.2 --namespace tap-install --values-file values.yaml

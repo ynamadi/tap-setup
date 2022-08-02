@@ -1,0 +1,4 @@
+namespace: prod-ns
+targetImagePullSecret: "registry-credentials"
+metadataStore:
+  url: "https://metadata-store.tap.tanzu.projectscions.com"

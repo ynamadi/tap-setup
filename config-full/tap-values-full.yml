@@ -4,9 +4,6 @@
 ---
 #@ def config():
 profile: full
-#!excluded_packages:
-#!  - snyk.scanning.apps.tanzu.vmware.com
-#!  - fluxcd.source.controller.tanzu.vmware.com
 ceip_policy_disclosed: true
 buildservice:
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
@@ -24,7 +21,14 @@ ootb_supply_chain_testing_scanning:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
+    server_address: https://github.com/
     ssh_secret: git-ssh
+    commit_strategy: pull_request
+    pull_request:
+      server_kind: github
+      pull_request_title: "Approval for Production deployment"
+      pull_request_body: "Please review the configuration and approve the deployment to production"
+      commit_branch: ""
   git_implementation: libgit2
   maven:
     repository:
@@ -32,8 +36,8 @@ ootb_supply_chain_testing_scanning:
       secret_name: maven-secret
   scanning:
     image:
-      template: private-image-scan-template
-      policy: scan-policy
+      template: snyk-private-image-scan-template
+      policy: snyk-scan-policy
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
