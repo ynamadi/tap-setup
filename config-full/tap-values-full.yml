@@ -63,6 +63,14 @@ tap_gui:
       - host: github.com
         token: #@ data.values.tap.credentials.github.token
       #@ end
+    catalog:
+      locations:
+      #@ for catalog in data.values.tap.catalogs:
+      - type: url
+        target: https://github.com/ynamadi/sample-calalog/blob/main/catalog-info.yaml
+      - type: url
+        target: https://github.com/ynamadi/sample-calalog/blob/main/user.yaml
+      #@ end
     supplyChain:
       enablePlugin: true
     backend:
