@@ -13,7 +13,7 @@ spec:
     package main
 
     # Accepted Values: "Critical", "High", "Medium", "Low", "Negligible", "UnknownSeverity"
-    notAllowedSeverities := ["Critical","High","UnknownSeverity","Negligible"]
+    notAllowedSeverities := ["UnknownSeverity","Negligible"]
     ignoreCves := []
 
     contains(array, elem) = true {
@@ -58,7 +58,7 @@ spec:
   regoFile: |
     package main
 
-    notAllowedSeverities := ["Critical","High","UnknownSeverity","Negligible"]
+    notAllowedSeverities := ["UnknownSeverity","Negligible"]
     ignoreCves := []
 
     contains(array, elem) = true {
