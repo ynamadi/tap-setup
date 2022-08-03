@@ -21,7 +21,7 @@ ootb_supply_chain_testing_scanning:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
-    ssh_secret: git-ssh
+    ssh_secret: ""
   git_implementation: libgit2
   maven:
     repository:
