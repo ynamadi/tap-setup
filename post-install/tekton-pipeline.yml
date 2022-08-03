@@ -37,6 +37,8 @@ spec:
                 printf maven | tee /tekton/results/build-tool
               elif test -f build.gradle; then
                 printf gradle | tee /tekton/results/build-tool
+              elif test -f repo.properties; then
+                printf smc | tee /tekton/results/build-tool
               else
                 printf go | tee /tekton/results/build-tool
               fi
@@ -63,6 +65,29 @@ spec:
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
               ./mvnw test
+    - name: test-mvn-smc
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      when:
+      - input: "$(tasks.check-build-tool.results.build-tool)"
+        operator: in
+        values: ["smc"]
+      runAfter:
+        - check-build-tool
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: test
+            image: gradle
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+              ./mvnw test -DmavenAntrunPlugin=true -Denv.bamboo_build_working_directory=. -Denv.bamboo_skipCleanTarget
     - name: gradle-test
       params:
         - name: source-url
