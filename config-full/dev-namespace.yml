@@ -7,6 +7,11 @@
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: tanzu-system-ingress
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: #@ data.values.tap.devNamespace
 ---
 #@ def config():
@@ -47,6 +52,18 @@ type: kubernetes.io/basic-auth
 stringData:
   username: #@ data.values.tap.credentials.github.username
   password: #@ data.values.tap.credentials.github.token
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-ssh-bitbucket
+  namespace: #@ data.values.tap.devNamespace
+  annotations:
+    tekton.dev/git-0: https://baffamn@bitbucket.org
+type: kubernetes.io/basic-auth
+stringData:
+  username: #@ data.values.tap.credentials.bitbucket.username
+  password: #@ data.values.tap.credentials.bitbucket.access_token
 ---
 apiVersion: v1
 kind: Secret
