@@ -7,7 +7,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: #@ data.values.tap.devNamespace
+  name: stage-ns
 ---
 #@ def config():
 #@  return {
