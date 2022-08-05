@@ -20,6 +20,7 @@ spec:
       - config
       - config-full
       - config-proxy
+      - post-install
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops
