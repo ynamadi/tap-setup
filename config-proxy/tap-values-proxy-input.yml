@@ -3,7 +3,7 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 tap:
-  devNamespace: dev-ns
+  devNamespace: stage-ns
 
   domains:
     learningCenter: learningcenter.tap.tanzu.projectscions.com
