@@ -35,8 +35,6 @@ learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
   ingressSecret:
     secretName: tls
-    server:
-      service_type: ClusterIP
 
 tap_gui:
   service_type: ClusterIP
