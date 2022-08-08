@@ -80,6 +80,7 @@ metadata:
 secrets:
   - name: registry-credentials
   - name: git-ssh
+  - name: bitbucket-ssh
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry
