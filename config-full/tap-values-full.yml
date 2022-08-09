@@ -18,7 +18,7 @@ ootb_supply_chain_testing_scanning:
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   gitops:
     server_address: https://bitbucket.org/
-    ssh_secret: git-ssh-bitbucket
+    ssh_secret: bitbucket-ssh
     commit_strategy: pull_request
     pull_request:
       server_kind: bitbucketserver
