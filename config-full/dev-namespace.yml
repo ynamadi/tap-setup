@@ -81,6 +81,7 @@ secrets:
   - name: registry-credentials
   - name: git-ssh
   - name: bitbucket-ssh
+  - name: gitlab-ssh
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry
