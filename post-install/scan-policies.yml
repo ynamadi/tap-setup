@@ -59,7 +59,7 @@ spec:
     package main
 
     notAllowedSeverities := ["Critical","High","UnknownSeverity","Negligible"]
-    ignoreCves := []
+    ignoreCves := ["GHSA-6v73-fgf6-w5j7"]
 
     contains(array, elem) = true {
       array[_] = elem
