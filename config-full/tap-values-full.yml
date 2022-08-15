@@ -3,7 +3,7 @@
 
 ---
 #@ def config():
-profile: full
+profile: iterate
 ceip_policy_disclosed: true
 buildservice:
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
