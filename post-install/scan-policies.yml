@@ -95,7 +95,7 @@ spec:
   regoFile: |
     package main
 
-    notAllowedSeverities := ["Low"]
+    notAllowedSeverities := ["Critical","High","UnknownSeverity","Negligible"]
     ignoreCves := []
 
     contains(array, elem) = true {
