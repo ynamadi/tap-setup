@@ -68,8 +68,6 @@ metadata:
 secrets:
   - name: registry-credentials
   - name: git-ssh
-  - name: bitbucket-ssh
-  - name: gitlab-ssh
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry
@@ -132,6 +130,33 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: default
+subjects:
+  - kind: ServiceAccount
+    name: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-permit-deliverable
+  namespace: #@ data.values.tap.devNamespace
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: deliverable
+subjects:
+  - kind: ServiceAccount
+    name: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-permit-workload
+  namespace: #@ data.values.tap.devNamespace
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: workload
 subjects:
   - kind: ServiceAccount
     name: default
