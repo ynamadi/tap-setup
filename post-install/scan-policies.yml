@@ -89,6 +89,8 @@ kind: ScanPolicy
 metadata:
   name: carbonblack-scan-policy
   namespace: #@ data.values.tap.devNamespace
+  labels:
+    'app.kubernetes.io/part-of': 'component-a'
 spec:
   regoFile: |
     package main
