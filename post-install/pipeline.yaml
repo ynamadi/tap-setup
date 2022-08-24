@@ -6,11 +6,11 @@ metadata:
   name: test-pipeline
   namespace: #@ data.values.tap.devNamespace
   labels:
-    apps.tanzu.vmware.com/pipeline: test      # (!) required
+    apps.tanzu.vmware.com/pipeline: test
 spec:
   params:
-    - name: source-url                        # (!) required
-    - name: source-revision                   # (!) required
+    - name: source-url
+    - name: source-revision                   
   tasks:
     - name: test
       params:
