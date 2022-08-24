@@ -37,7 +37,7 @@ spec:
                 printf maven | tee /tekton/results/build-tool
               elif test -f build.gradle; then
                 printf gradle | tee /tekton/results/build-tool
-              elif test -f *.csproj; then
+              elif test -f Program.cs; then
                 printf dotnet | tee /tekton/results/build-tool
               else
                 printf go | tee /tekton/results/build-tool
@@ -129,7 +129,7 @@ spec:
           - name: source-revision
         steps:
           - name: test
-            image:  mcr.microsoft.com/dotnet/core/sdk:latest
+            image:  mcr.microsoft.com/dotnet/core/sdk:3.1
             script: |-
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
