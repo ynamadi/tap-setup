@@ -1,9 +1,8 @@
 #@ load("@ytt:data", "data")
-
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: test-pipeline
+  name: tekton-pipeline
   namespace: #@ data.values.tap.devNamespace
   labels:
     apps.tanzu.vmware.com/pipeline: test
@@ -12,12 +11,49 @@ spec:
     - name: source-url
     - name: source-revision
   tasks:
-    - name: test
+    - name: check-build-tool
       params:
         - name: source-url
           value: $(params.source-url)
         - name: source-revision
           value: $(params.source-revision)
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        results:
+          - name: build-tool
+            description: returns the used build-tool
+        steps:
+          - name: check-file
+            image: alpine
+            script: |
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+
+              if test -f package.json; then
+                printf npm | tee /tekton/results/build-tool
+              elif test -f pom.xml; then
+                printf maven | tee /tekton/results/build-tool
+              elif test -f build.gradle; then
+                printf gradle | tee /tekton/results/build-tool
+              elif test -f *.csproj; then
+                printf dotnet | tee /tekton/results/build-tool
+              else
+                printf go | tee /tekton/results/build-tool
+              fi
+    - name: test-mvn
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      when:
+      - input: "$(tasks.check-build-tool.results.build-tool)"
+        operator: in
+        values: ["maven"]
+      runAfter:
+        - check-build-tool
       taskSpec:
         params:
           - name: source-url
@@ -29,3 +65,74 @@ spec:
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
               ./mvnw test
+    - name: gradle-test
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      when:
+      - input: "$(tasks.check-build-tool.results.build-tool)"
+        operator: in
+        values: ["gradle"]
+      runAfter:
+        - check-build-tool
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: test
+            image: gradle
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+              ./gradlew test
+    - name: npm-test
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      when:
+      - input: "$(tasks.check-build-tool.results.build-tool)"
+        operator: in
+        values: ["npm"]
+      runAfter:
+        - check-build-tool
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: test
+            image: node:8
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+              npm install-test
+    - name: dotnet-test
+      params:
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      when:
+      - input: "$(tasks.check-build-tool.results.build-tool)"
+        operator: in
+        values: ["dotnet"]
+      runAfter:
+        - check-build-tool
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: test
+            image:  mcr.microsoft.com/dotnet/core/sdk:latest
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+              dotnet restore ./test
+              dotnet build ./test
+              dotnet test ./test --logger "console;verbosity=detailed
