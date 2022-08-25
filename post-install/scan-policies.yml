@@ -91,38 +91,32 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
   labels:
     'app.kubernetes.io/part-of': 'component-a'
-spec:
-  regoFile: |
+regoFile: |
     package main
-
     # Accepted Values: "Critical", "High", "Medium", "Low", "Negligible", "UnknownSeverity"
     notAllowedSeverities := ["Critical","High","UnknownSeverity","Negligible"]
     ignoreCves := []
-
     contains(array, elem) = true {
-      array[_] = elem
+      array[_[] = elem
     } else = false { true }
-
     isSafe(match) {
-      severities := { e | e := match.ratings.rating.severity } | { e | e := match.ratings.rating[_].severity }
+      severities := { e | e := match.ratings.rating.severity } | { e | e := match.ratings.rating[_[].severity }
       some i
-      fails := contains(notAllowedSeverities, severities[i])
+      fails := contains(notAllowedSeverities, severities[i[])
       not fails
     }
-
     isSafe(match) {
       ignore := contains(ignoreCves, match.id)
       ignore
     }
-
-    deny[msg] {
-      comps := { e | e := input.bom.components.component } | { e | e := input.bom.components.component[_] }
+    deny[msg[] {
+      comps := { e | e := input.bom.components.component } | { e | e := input.bom.components.component[_[] }
       some i
-      comp := comps[i]
-      vulns := { e | e := comp.vulnerabilities.vulnerability } | { e | e := comp.vulnerabilities.vulnerability[_] }
+      comp := comps[i[]
+      vulns := { e | e := comp.vulnerabilities.vulnerability } | { e | e := comp.vulnerabilities.vulnerability[_[] }
       some j
-      vuln := vulns[j]
-      ratings := { e | e := vuln.ratings.rating.severity } | { e | e := vuln.ratings.rating[_].severity }
+      vuln := vulns[j[]
+      ratings := { e | e := vuln.ratings.rating.severity } | { e | e := vuln.ratings.rating[_[].severity }
       not isSafe(vuln)
-      msg = sprintf("CVE %s %s %s", [comp.name, vuln.id, ratings])
+      msg = sprintf("CVE %s %s %s", [comp.name, vuln.id, ratings[])
     }
