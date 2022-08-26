@@ -4,6 +4,14 @@
 ---
 #@ def config():
 profile: full
+
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+shared:
+  ingress_domain: #@ data.values.tap.domains.main
+
 ceip_policy_disclosed: true
 buildservice:
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
@@ -30,8 +38,6 @@ learningcenter:
 
 tap_gui:
   service_type: ClusterIP
-  ingressEnabled: "true"
-  ingressDomain: #@ data.values.tap.domains.main
   tls:
     namespace: tanzu-system-ingress
     secretName: tls
@@ -101,12 +107,6 @@ scanning:
   metadataStore:
     url: ""
     ns_for_export_app_cert: "*"
-
-
-contour:
-  envoy:
-    service:
-      type: LoadBalancer
 
 cnrs:
   domain_name: #@ data.values.tap.domains.knative
