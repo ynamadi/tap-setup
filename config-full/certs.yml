@@ -1,9 +1,19 @@
 #@ load("@ytt:data", "data")
 ---
+apiVersion: v1
+data:
+  gcloud-dns.json: #@ data.values.tap.credentials.gcloud
+kind: Secret
+metadata:
+  name: gcloud-dns
+  namespace: tanzu-system-ingress
+type: Opaque
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-http01-issuer
+  namespace: tanzu-system-ingress
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
@@ -11,9 +21,14 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-http01-issuer
     solvers:
-      - http01:
-          ingress:
-            class: contour
+    - dns01:
+      cloudDNS:
+        # The ID of the GCP project
+        project: se-greatlakes
+        # This is the secret used to access the service account
+        serviceAccountSecretRef:
+          name: gcloud-dns
+          key: gcloud-dns.json
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
