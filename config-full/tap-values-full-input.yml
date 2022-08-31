@@ -8,6 +8,7 @@ tap:
   domains:
     learningCenter: learningcenter.tanzu.y-compiles.com
     knative: apps.tanzu.y-compiles.com
+    metadataStore: metadata-store.tanzu.y-compiles.com
     appliveview:
           host: appliveview.tanzu.y-compiles.com
           port: 443
