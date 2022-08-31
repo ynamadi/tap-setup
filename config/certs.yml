@@ -4,7 +4,7 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
-  namespace: default
+  namespace: tanzu-system-ingress
 spec:
   acme:
     email: yunusa.namadi@gmail.com
@@ -25,6 +25,7 @@ spec:
   secretName: tls
   issuerRef:
     name: letsencrypt-prod
+    kind: ClusterIssuer
   dnsNames:
   - '*.tanzu.y-compiles.com'
   - harbor.y-compiles.com
