@@ -126,6 +126,10 @@ appliveview_connector:
     #!    port: #@ data.values.tap.domains.appliveview.port
     sslDisabled: "true"
 
+package_overlays:
+- name: tap-gui
+  secrets:
+  - name: k8s-reader-overlay
 #@ end
 ---
 apiVersion: v1
