@@ -32,8 +32,8 @@ spec:
         cloudDNS:
           project: se-greatlakes
           serviceAccountSecretRef:
-            name: gcloud-dns
-            key: gcloud-dns.json
+            name: clouddns-dns01-solver-svc-acct
+            key: key.json
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
