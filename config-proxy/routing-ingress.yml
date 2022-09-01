@@ -1,14 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml")
 ---
-apiVersion: v1
-data: #@ data.values.tap.credentials.certificate
-kind: Secret
-metadata:
-  name: tls
-  namespace: learningcenter
-type: kubernetes.io/tls
----
 apiVersion: projectcontour.io/v1
 kind: TLSCertificateDelegation
 metadata:

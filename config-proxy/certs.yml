@@ -7,7 +7,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: yunusa.namadi@gmail.com
+    email:  #@ data.values.tap.credentials.lets-encrypt-email
     privateKeySecretRef:
       name: letsencrypt-http01-issuer
     solvers:
@@ -23,6 +23,21 @@ kind: Certificate
 metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
+spec:
+  commonName: '*.tanzu.y-compiles.com'
+  secretName: tls
+  issuerRef:
+    name: letsencrypt-http01-issuer
+    kind: ClusterIssuer
+  dnsNames:
+  - '*.tanzu.y-compiles.com'
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: y-compiles.com
+  namespace: learningcenter
 spec:
   commonName: '*.tanzu.y-compiles.com'
   secretName: tls
