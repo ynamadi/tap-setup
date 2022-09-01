@@ -25,12 +25,13 @@ spec:
           project: se-greatlakes
           serviceAccountSecretRef:
             name: gcloud-dns
+            namespace: tanzu-system-ingress
             key: gcloud-dns.json
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: tls
+  name: y-compiles.com
   namespace: tanzu-system-ingress
 spec:
   commonName: '*.tanzu.y-compiles.com'
