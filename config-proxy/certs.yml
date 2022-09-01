@@ -21,11 +21,11 @@ spec:
       name: letsencrypt-http01-issuer
     solvers:
     - dns01:
-      cloudDNS:
-        project: se-greatlakes
-        serviceAccountSecretRef:
-          name: gcloud-dns
-          key: gcloud-dns.json
+        cloudDNS:
+          project: se-greatlakes
+          serviceAccountSecretRef:
+            name: gcloud-dns
+            key: gcloud-dns.json
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
