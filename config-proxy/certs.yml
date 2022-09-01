@@ -1,6 +1,14 @@
 #@ load("@ytt:data", "data")
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gcloud-dns
+  namespace: cert-manager
+secrets:
+  - name: gcloud-dns
+---
+apiVersion: v1
 data:
   gcloud-dns.json: #@ data.values.tap.credentials.gcloud
 kind: Secret
