@@ -4,9 +4,9 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: gcloud-dns
-  namespace: default
+  namespace: tanzu-system-ingress
 secrets:
-  - name:  gcloud-dns
+  - name: gcloud-dns
 ---
 apiVersion: v1
 data:
@@ -33,7 +33,6 @@ spec:
           project: se-greatlakes
           serviceAccountSecretRef:
             name: gcloud-dns
-            namespace: tanzu-system-ingress
             key: gcloud-dns.json
 ---
 apiVersion: cert-manager.io/v1
