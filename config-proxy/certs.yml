@@ -1,33 +1,15 @@
 #@ load("@ytt:data", "data")
 ---
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-http01-issuer
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email:  #@ data.values.tap.credentials.letsencrypt.email
-    privateKeySecretRef:
-      name: letsencrypt-http01-issuer
-    solvers:
-    - dns01:
-        cloudDNS:
-          project: se-greatlakes
-          serviceAccountSecretRef:
-            name: clouddns-dns01-solver-svc-acct
-            key: key.json
----
-apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
 spec:
-  commonName: '*.tanzu.y-compiles.com'
+  commonName: '*.tap.tanzu.y-compiles.com'
   secretName: tls
   issuerRef:
     name: letsencrypt-http01-issuer
     kind: ClusterIssuer
   dnsNames:
-  - '*.tanzu.y-compiles.com'
+  - '*.tap.tanzu.y-compiles.com'
