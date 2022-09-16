@@ -6,10 +6,10 @@ tap:
   devNamespace: tap-dev
 
   domains:
-    learningCenter: learningcenter.tanzu.y-compiles.com
-    knative: apps.tanzu.y-compiles.com
+    learningCenter: learningcenter.tap.tanzu.y-compiles.com
+    knative: apps.tap.tanzu.y-compiles.com
 
-domain: tanzu.y-compiles.com
+domain: tap.tanzu.y-compiles.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress
