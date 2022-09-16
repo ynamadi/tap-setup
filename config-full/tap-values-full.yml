@@ -28,8 +28,8 @@ ootb_supply_chain_testing_scanning:
     ssh_secret: git-ssh
   scanning:
     image:
-      template: carbonblack-private-image-scan-template
-      policy: carbonblack-scan-policy
+      template: private-image-scan-template
+      policy: scan-policy
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
