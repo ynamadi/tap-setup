@@ -52,21 +52,21 @@ spec:
     fqdn: #@ "api-portal.{}".format(data.values.domain)
     tls:
       secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
----
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
-metadata:
-  name: learningcenter
-  namespace: learning-center-guided-ui
-  annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tap-install/tap"
-spec:
-  virtualhost:
-    fqdn: #@ "learningcenter.{}".format(data.values.domain)
-    tls:
-      secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
-  routes:
-    - services:
-        - name: learningcenter-portal
-          port: 8080
----
+#!---
+#!apiVersion: projectcontour.io/v1
+#!kind: HTTPProxy
+#!metadata:
+#!  name: learningcenter
+#!  namespace: learning-center-guided-ui
+#!  annotations:
+#!    kapp.k14s.io/change-rule: "upsert after upserting tap-install/tap"
+#!spec:
+#!  virtualhost:
+#!    fqdn: #@ "learningcenter.{}".format(data.values.domain)
+#!    tls:
+#!      secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
+#!  routes:
+#!    - services:
+#!        - name: learningcenter-portal
+#!          port: 8080
+#!---
