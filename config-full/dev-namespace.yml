@@ -54,6 +54,18 @@ stringData:
 apiVersion: v1
 kind: Secret
 metadata:
+  name: azure-devops-ssh
+  namespace: #@ data.values.tap.devNamespace
+  annotations:
+    tekton.dev/git-0: https://ynamadi@dev.azure.com
+type: kubernetes.io/basic-auth
+stringData:
+  username: #@ data.values.tap.credentials.azure_devops.username
+  password: #@ data.values.tap.credentials.azure_devops.access_token
+---
+apiVersion: v1
+kind: Secret
+metadata:
   name: registry-credentials
   namespace: #@ data.values.tap.devNamespace
 type: kubernetes.io/dockerconfigjson
