@@ -4,7 +4,7 @@ snyk:
   tokenSecret:
     name: snyk-token-secret
 metadataStore:
-  url: "https://metadata-store.tanzu.y-compiles.com"
+  url: "https://metadata-store.tap.tanzu.y-compiles.com"
   caSecret:
     importFromNamespace: ""
   authSecret:
