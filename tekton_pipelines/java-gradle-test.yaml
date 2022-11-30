@@ -29,10 +29,10 @@ spec:
         type: string
       spec: null
       steps:
-      - image: gradle
+      - image: bellsoft/liberica-openjdk-alpine:11
         name: test
         resources: {}
         script: |-
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
-          ./gradlew -x test
+          ./gradlew test
