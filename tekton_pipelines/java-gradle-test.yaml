@@ -1,0 +1,38 @@
+#@ load("@ytt:data", "data")
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  labels:
+    apps.tanzu.vmware.com/pipeline: test
+    apps.tanzu.vmware.com/language: java-gradle
+  name: java-gradle-test-pipeline
+  namespace: #@ data.values.tap.devNamespace
+spec:
+  params:
+  - name: source-url
+    type: string
+  - name: source-revision
+    type: string
+  tasks:
+  - name: java-gradle-test
+    params:
+    - name: source-url
+      value: $(params.source-url)
+    - name: source-revision
+      value: $(params.source-revision)
+    taskSpec:
+      metadata: {}
+      params:
+      - name: source-url
+        type: string
+      - name: source-revision
+        type: string
+      spec: null
+      steps:
+      - image: gradle
+        name: test
+        resources: {}
+        script: |-
+          cd `mktemp -d`
+          wget -qO- $(params.source-url) | tar xvz -m
+          ./gradlew test

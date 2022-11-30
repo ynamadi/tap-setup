@@ -1,0 +1,40 @@
+#@ load("@ytt:data", "data")
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  labels:
+    apps.tanzu.vmware.com/pipeline: test
+    apps.tanzu.vmware.com/language: dotnet
+  name: dotnet-test-pipeline
+  namespace: #@ data.values.tap.devNamespace
+spec:
+  params:
+  - name: source-url
+    type: string
+  - name: source-revision
+    type: string
+  tasks:
+  - name: dotnet-test
+    params:
+    - name: source-url
+      value: $(params.source-url)
+    - name: source-revision
+      value: $(params.source-revision)
+    taskSpec:
+      metadata: {}
+      params:
+      - name: source-url
+        type: string
+      - name: source-revision
+        type: string
+      spec: null
+      steps:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+        name: test
+        resources: {}
+        script: |-
+          cd `mktemp -d`
+          wget -qO- $(params.source-url) | tar xvz -m
+          dotnet restore ./test
+          dotnet build ./test
+          dotnet test ./test --logger "console;verbosity=detailed
