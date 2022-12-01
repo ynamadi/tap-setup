@@ -20,7 +20,6 @@ spec:
       - config
       - config-full
       - config-proxy
-      - post-install
       - scan_policies
       - tekton_pipelines
       valuesFrom:
