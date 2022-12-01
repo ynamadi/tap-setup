@@ -29,7 +29,7 @@ spec:
         type: string
       spec: null
       steps:
-      - image: bellsoft/liberica-openjdk-alpine:11
+      - image: gradle
         name: test
         resources: {}
         script: |-
