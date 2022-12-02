@@ -11,7 +11,7 @@ tap:
     host: tapbuild.azurecr.io
     repositories:
       buildService: tap/build-service
-      ootbSupplyChain: tap/supply-chain
+      ootbSupplyChain: tanzu-application-platform
 
   domains:
     main: tap.tanzu.y-compiles.com
