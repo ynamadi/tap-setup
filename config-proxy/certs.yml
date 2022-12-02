@@ -15,3 +15,4 @@ spec:
   - 'metadata-store.tap.tanzu.y-compiles.com'
   - 'tap-gui.tap.tanzu.y-compiles.com'
   - '*.apps.tap.tanzu.y-compiles.com'
+  - '*.tap.tanzu.y-compiles.com'
