@@ -5,6 +5,9 @@
 #@ def config():
 profile: full
 
+tap_telemetry:
+   installed_for_vmware_internal_use: "true"
+
 contour:
   envoy:
     service:
@@ -93,10 +96,7 @@ tap_gui:
     #@ end
 metadata_store:
   ns_for_export_app_cert: "*"
-  ingress_enabled: "true"
-  ingress_domain: #@ data.values.tap.domains.main
-  ingressSecret:
-    secretName: tls
+  app_service_type: ClusterIP
 
 grype:
   namespace: #@ data.values.tap.devNamespace
