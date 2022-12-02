@@ -23,6 +23,12 @@ buildservice:
 
 supply_chain: testing_scanning
 
+ootb_templates:
+  # Enable the config writer service to use cloud based iaas authentication
+  # which are retrieved from the developer namespace service account by
+  # default
+  iaas_auth: true
+
 ootb_supply_chain_testing_scanning:
   registry:
     server: #@ data.values.tap.credentials.registry.workload.repository
