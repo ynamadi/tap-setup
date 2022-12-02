@@ -8,21 +8,22 @@ profile: full
 contour:
   envoy:
     service:
-      type: LoadBalancer
+      aws:
+        LBType: nlb
 shared:
   ingress_domain: #@ data.values.tap.domains.main
 
 ceip_policy_disclosed: true
 buildservice:
-  kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
-  kp_default_repository_username: #@ data.values.tap.credentials.registry.username
-  kp_default_repository_password: #@ data.values.tap.credentials.registry.password
+  kp_default_repository: #@ data.values.tap.credentials.registry.build_service.repository
+  kp_default_repository_aws_iam_role_arn: #@ data.values.tap.credentials.registry.build_service.aws_iam_role_arn
+  exclude_dependencies: true
 
 supply_chain: testing_scanning
 
 ootb_supply_chain_testing_scanning:
   registry:
-    server: #@ data.values.tap.registry.host
+    server: #@ data.values.tap.credentials.registry.workload.repository
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   git_implementation: libgit2
   gitops:
