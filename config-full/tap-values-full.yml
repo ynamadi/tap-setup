@@ -8,8 +8,7 @@ profile: full
 contour:
   envoy:
     service:
-      aws:
-        LBType: nlb
+      type: LoadBalancer
 shared:
   ingress_domain: #@ data.values.tap.domains.main
 
