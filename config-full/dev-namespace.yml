@@ -88,6 +88,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    eks.amazonaws.com/role-arn: #@ data.values.tap.credentials.aws.aws_iam_role_arn
 secrets:
   - name: registry-credentials
   - name: git-ssh
