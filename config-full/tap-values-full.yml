@@ -18,7 +18,7 @@ shared:
 ceip_policy_disclosed: true
 buildservice:
   kp_default_repository: #@ data.values.tap.credentials.registry.build_service.repository
-  kp_default_repository_aws_iam_role_arn: #@ data.values.tap.credentials.aws.aws_iam_role_arn
+  kp_default_repository_aws_iam_role_arn: #@ data.values.tap.credentials.aws.roles.build_service_iam_role_arn
 
 supply_chain: testing_scanning
 
