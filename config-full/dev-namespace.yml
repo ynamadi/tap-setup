@@ -13,8 +13,8 @@ metadata:
 #@  return {
 #@    "auths": {
 #@      data.values.tap.registry.host: {
-#@        "username": data.values.tap.credentials.registry.username,
-#@        "password": data.values.tap.credentials.registry.password
+#@        "username": data.values.tap.credentials.registry.workload.username,
+#@        "password": data.values.tap.credentials.registry.workload.password
 #@      }
 #@    }
 #@  }
