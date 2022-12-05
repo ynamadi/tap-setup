@@ -90,6 +90,8 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
   annotations:
     eks.amazonaws.com/role-arn: #@ data.values.tap.credentials.aws.roles.workload_iam_role_arn
+imagePullSecrets:
+  - name: tap-registry
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
