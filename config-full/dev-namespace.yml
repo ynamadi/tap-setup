@@ -9,17 +9,6 @@ kind: Namespace
 metadata:
   name: #@ data.values.tap.devNamespace
 ---
-#@ def config():
-#@  return {
-#@    "auths": {
-#@      data.values.tap.registry.server: {
-#@        "username": data.values.tap.credentials.registry.workload.username,
-#@        "password": data.values.tap.credentials.registry.workload.password
-#@      }
-#@    }
-#@  }
-#@ end
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -62,15 +51,6 @@ type: kubernetes.io/basic-auth
 stringData:
   username: #@ data.values.tap.credentials.azure_devops.username
   password: #@ data.values.tap.credentials.azure_devops.access_token
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: registry-credentials
-  namespace: #@ data.values.tap.devNamespace
-type: kubernetes.io/dockerconfigjson
-stringData:
-  .dockerconfigjson: #@ json.encode(config())
 ---
 apiVersion: v1
 kind: Secret

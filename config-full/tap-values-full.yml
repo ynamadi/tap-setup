@@ -25,6 +25,13 @@ supply_chain: testing_scanning
 ootb_templates:
   iaas_auth: true
 
+namespace_provisioner:
+  controller: yes
+  aws_iam_role_arn: #@ data.values.tap.credentials.aws.roles.eks_cluster_iam_role_arn
+  namespace_selector:
+    key: apps.tanzu.vmware.com/tap-ns
+    operator: Exists
+
 ootb_supply_chain_testing_scanning:
   registry:
     server: #@ data.values.tap.credentials.registry.workload.server

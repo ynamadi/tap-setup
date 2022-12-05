@@ -18,18 +18,54 @@ to every cluster. These tools are part of the TAP prerequisites.
 
 ## How to use it?
 
-Make sure [Cluster Essentials for VMware Tanzu is deployed to your cluster](https://docs.vmware.com/en/Tanzu-Application-Platform/1.0/tap/GUID-install-general.html#install-cluster-essentials-for-vmware-tanzu-2).
+Make sure [Cluster Essentials for VMware Tanzu is deployed to your cluster](https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.3/cluster-essentials/GUID-deploy.html).
 
 You don't need to use the `tanzu` CLI to apply the configuration with a GitOps approach:
 all `tanzu` commands described in the documentation have been integrated as YAML definitions.
 
-####Step 1 -  Remove **config-proxy** and **post-install** scripts from the initial install
+### Creating AWS Resources
+
+####Step 1 - Create an EKS Cluster
+
+```shell
+export EKS_CLUSTER_NAME=tap-on-aws
+export AWS_REGION="your-preferred-region"
+eksctl create cluster --name $EKS_CLUSTER_NAME --managed --region $AWS_REGION --instance-types t3.large --version 1.23 --with-oidc -N 6
+aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION}
+```
+
+####Step 2 - Create ECR container registries
+```shell
+aws ecr create-repository --repository-name tap-images --region $AWS_REGION
+aws ecr create-repository --repository-name tap-build-service --region $AWS_REGION
+```
+
+With AWS ECR's limitation on creating repositories on push you will need to create a repo for each workload.
+```shell
+aws ecr create-repository --repository-name tanzu-application-platform/$WORKLOAD_NAME-$DEVELOPER_NAMESPACE --region $AWS_REGION
+aws ecr create-repository --repository-name tanzu-application-platform/$WORKLOAD_NAME-$DEVELOPER_NAMESPACE-bundle --region $AWS_REGION
+```
+
+####Step 3 - If you are using k8s 1.23 and above you will need to enable the Amazon EBS CSI plugin.
+```shell
+eksctl create iamserviceaccount \
+  --name ebs-csi-controller-sa \
+  --namespace kube-system \
+  --cluster $EKS_CLUSTER_NAME \
+  --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+  --approve \
+  --role-only \
+  --role-name AmazonEKS_EBS_CSI_DriverRole
+```
+
+####Step 4 -  Remove **config-proxy** and **post-install** scripts from the initial installation.
 **Note:** 
-- _In **gitops/tap-install.yml** remove **- config-proxy** and **- post-install** from template.ytt.paths and push to github._ 
+- _In **gitops/tap-install.yml** remove **- config-proxy** , **- post-install** , **scan_policies** and **tekton_pipelines** from template.ytt.paths and push to github._ 
 - _During the installation there is a pre-check that happens for Contour resources in order to apply the proxy configuration, since contour is not available yet, we will need to wait for it to be installed before we can apply the proxy configurations._
+- _Also this ensures the Scanners(Carbon-Black, Snyk or Grype), and Tekton are installed prior to creating objects_
 
 
-####Step 2 - Create new file `tap-install-config.yml` in `gitops`, reusing content from [`tap-install-config.yml.tpl`](gitops/tap-install-config.yml.tmp).
+####Step 5 - Create new file `tap-install-config.yml` in `gitops`, reusing content from [`tap-install-config.yml.tpl`](gitops/tap-install-config.yml.tmp).
 
 Edit this file accordingly:
 
