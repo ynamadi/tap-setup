@@ -31,6 +31,17 @@ namespace_provisioner:
     matchExpressions:
     - key: apps.tanzu.vmware.com/tap-ns
       operator: Exists
+  additional_sources:
+    - git:
+        ref: origin/main
+        subPath: custom-resources/scanpolicies
+        url: https://github.com/ynamadi/tap-bug-bash-1.4.git
+      path: _ytt_lib/scanpolicies
+    - git:
+        ref: origin/main
+        subPath: custom-resources/tektonpipelines
+        url: https://github.com/ynamadi/tap-bug-bash-1.4.git
+      path: _ytt_lib/tektonpipelines
 
 ootb_supply_chain_testing_scanning:
   registry:
