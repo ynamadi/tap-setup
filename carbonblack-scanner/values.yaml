@@ -1,5 +1,4 @@
 namespace: tap-dev
-targetImagePullSecret: "registry-credentials"
 carbonBlack:
   configSecret:
     name: carbonblack-token-secret
