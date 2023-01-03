@@ -19,7 +19,8 @@
 /eks-cluster-setup.sh
 /aks-cluster-setup.sh
 /.idea/
-/tanzu-cluster-essentials/
-tanzu-cluster-essentials/bundle/.imgpkg/images.yml
 /gitops/tap-install-config.yml.tmp
 /gitops/tap-install-secrets.yml.tmp
+/gitops/tap-install-secrets.yml
+/gitops/tap-install-config.yml
+/azure-dns-setup.sh

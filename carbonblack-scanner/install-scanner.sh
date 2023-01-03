@@ -1,1 +1,1 @@
-tanzu package install carbonblack-scanner --package-name carbonblack.scanning.apps.tanzu.vmware.com --version 1.0.1-beta.1.build.1 --namespace tap-install --values-file values.yaml
+tanzu package install carbonblack-scanner --package-name carbonblack.scanning.apps.tanzu.vmware.com --version 1.1.0-beta.1 --namespace tap-install --values-file values.yaml

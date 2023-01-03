@@ -9,16 +9,17 @@ kind: Namespace
 metadata:
   name: #@ data.values.tap.devNamespace
 ---
-#@ def config():
-#@  return {
-#@    "auths": {
-#@      data.values.tap.registry.host: {
-#@        "username": data.values.tap.credentials.registry.username,
-#@        "password": data.values.tap.credentials.registry.password
-#@      }
-#@    }
-#@  }
-#@ end
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cosign-key-pair
+  namespace: #@ data.values.tap.devNamespace
+type: Opaque
+data:
+  cosign.key: #@ data.values.tap.credentials.cosign.cosign_key
+  cosign.password: #@ data.values.tap.credentials.cosign.cosign_password
+  cosign.pub: #@ data.values.tap.credentials.cosign.cosign_pub
+immutable: true
 ---
 apiVersion: v1
 kind: Secret
@@ -66,15 +67,6 @@ stringData:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: registry-credentials
-  namespace: #@ data.values.tap.devNamespace
-type: kubernetes.io/dockerconfigjson
-stringData:
-  .dockerconfigjson: #@ json.encode(config())
----
-apiVersion: v1
-kind: Secret
-metadata:
   name: tap-registry
   namespace: #@ data.values.tap.devNamespace
   annotations:
@@ -91,9 +83,9 @@ metadata:
 secrets:
   - name: registry-credentials
   - name: git-ssh
+  - name: cosign-key-pair
 imagePullSecrets:
-  - name: registry-credentials
-  - name: tap-registry
+- name: tap-registry
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role

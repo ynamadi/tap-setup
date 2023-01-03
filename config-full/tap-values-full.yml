@@ -5,6 +5,9 @@
 #@ def config():
 profile: full
 
+tap_telemetry:
+   installed_for_vmware_internal_use: "true"
+
 contour:
   envoy:
     service:
