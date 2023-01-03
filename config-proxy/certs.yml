@@ -13,4 +13,3 @@ spec:
     kind: ClusterIssuer
   dnsNames:
   - '*.tap.tanzu.y-compiles.com'
-  - 'tap-gui.tap.tanzu.y-compiles.com'
