@@ -10,8 +10,8 @@ tap:
   registry:
     host: tapbuild.azurecr.io
     repositories:
-      buildService: tap/build-service
-      ootbSupplyChain: tap/supply-chain
+      buildService: repo/build-service
+      ootbSupplyChain: repo/supply-chain
 
   domains:
     main: tap.tanzu.y-compiles.com
