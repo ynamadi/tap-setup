@@ -29,7 +29,7 @@ spec:
         type: string
       spec: null
       steps:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
         name: test
         resources: {}
         script: |-
