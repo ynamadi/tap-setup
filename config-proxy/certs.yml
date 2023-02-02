@@ -13,3 +13,20 @@ spec:
     kind: ClusterIssuer
   dnsNames:
   - '*.tap.tanzu.y-compiles.com'
+  - '*.learningcenter.tap.tanzu.y-compiles.com'
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretExport
+metadata:
+  name: tls
+  namespace: tanzu-system-ingress
+spec:
+  toNamespace: learningcenter
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: tls
+  namespace: learningcenter
+spec:
+  fromNamespace: tanzu-system-ingress
