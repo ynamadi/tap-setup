@@ -13,7 +13,7 @@ spec:
     kind: ClusterIssuer
   dnsNames:
   - '*.tap.tanzu.y-compiles.com'
-  - 'customer-profile-tap-dev.apps.tap.tanzu.y-compiles.com'
+  - '*.apps.tap.tanzu.y-compiles.com'
   - '*.learningcenter.tap.tanzu.y-compiles.com'
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
