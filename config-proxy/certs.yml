@@ -14,7 +14,6 @@ spec:
   dnsNames:
   - 'customer-profile-tap-dev.apps.tap.tanzu.y-compiles.com'
   - '*.tap.tanzu.y-compiles.com'
-  - '*.apps.tap.tanzu.y-compiles.com'
   - '*.learningcenter.tap.tanzu.y-compiles.com'
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
