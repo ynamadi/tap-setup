@@ -77,7 +77,7 @@ tap_gui:
       #@ end
     catalog:
       locations: #@ data.values.tap.credentials.catalogs
-      #@ end
+      
     supplyChain:
       enablePlugin: true
     backend:
