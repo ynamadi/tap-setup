@@ -6,6 +6,7 @@ metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
 spec:
+  commonName: 'tap-gui.tap.tanzu.y-compiles.com'
   secretName: tls
   issuerRef:
     name: letsencrypt-production
