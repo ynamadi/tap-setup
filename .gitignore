@@ -24,3 +24,5 @@
 /gitops/tap-install-secrets.yml
 /gitops/tap-install-config.yml
 /azure-dns-setup.sh
+.DS_Store
+insight-ca.crt
