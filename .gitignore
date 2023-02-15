@@ -26,3 +26,4 @@
 /azure-dns-setup.sh
 .DS_Store
 insight-ca.crt
+/custom-supply-chains/source-to-url.yaml
