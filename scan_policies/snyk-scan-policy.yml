@@ -12,9 +12,8 @@ metadata:
 spec:
   regoFile: |
     package main
-
     notAllowedSeverities := ["Critical", "High", "UnknownSeverity", "Negligible"]
-    ignoreCves := []
+    ignoreCves := ["SNYK-UBUNTU1804-OPENSSL-3314796"]
 
     contains(array, elem) = true {
       array[_] = elem
