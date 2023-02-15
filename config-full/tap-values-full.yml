@@ -24,9 +24,9 @@ buildservice:
   tanzunet_username: #@ data.values.tap.credentials.tanzuNet.username
   tanzunet_password: #@ data.values.tap.credentials.tanzuNet.password
 
-supply_chain: testing_scanning
+supply_chain: basic
 
-ootb_supply_chain_testing_scanning:
+ootb_supply_chain_basic:
   registry:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
