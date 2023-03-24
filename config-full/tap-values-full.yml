@@ -49,11 +49,11 @@ tap_gui:
     namespace: tanzu-system-ingress
     secretName: tls
   app_config:
-    organization:
-      name: #@ data.values.tap.credentials.customize.org_name
-    customize:
-      custom_logo: #@ data.values.tap.credentials.customize.custom_logo
-      custom_name: #@ data.values.tap.credentials.customize.custom_name
+    #!organization:
+      #!name: #@ data.values.tap.credentials.customize.org_name
+    #!customize:
+      #!custom_logo: #@ data.values.tap.credentials.customize.custom_logo
+      #!custom_name: #@ data.values.tap.credentials.customize.custom_name
     techdocs:
       builder: 'external'
       publisher:
