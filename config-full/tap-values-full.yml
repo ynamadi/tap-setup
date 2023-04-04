@@ -140,12 +140,6 @@ appliveview:
     namespace: tanzu-system-ingress
     secretName: tls
 
-appliveview_connector:
-  backend:
-    #!host: #@ data.values.tap.domains.appliveview.host
-    #!    port: #@ data.values.tap.domains.appliveview.port
-    sslDisabled: "true"
-
 package_overlays:
 - name: tap-gui
   secrets:
