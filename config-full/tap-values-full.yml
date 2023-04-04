@@ -192,21 +192,21 @@ stringData:
         #@overlay/match missing_ok=True
         ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: my-custom-labels
 
-    ---
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: my-custom-labels
-    stringData:
-      add-my-custom-labels.yml: |
-        #@ load("@ytt:overlay", "overlay")
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-custom-labels
+stringData:
+  add-my-custom-labels.yml: |
+    #@ load("@ytt:overlay", "overlay")
 
-        #@overlay/match by=overlay.subset({"kind": "Namespace"}),expects="0+"
-        ---
-        metadata:
-          #@overlay/match missing_ok=True
-          labels:
-            #@overlay/match missing_ok=True
-            istio-injection: "false"
-            #@overlay/match missing_ok=True
-            tmc-policy: "false"
+    #@overlay/match by=overlay.subset({"kind": "Namespace"}),expects="0+"
+    ---
+    metadata:
+      #@overlay/match missing_ok=True
+      labels:
+        #@overlay/match missing_ok=True
+        istio-injection: "false"
+        #@overlay/match missing_ok=True
+        tmc-policy: "false"
