@@ -119,11 +119,11 @@ metadata_store:
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
-  certIssuer: letsencrypt-production
   metadataStore:
     url: #@ "https://{}".format(data.values.tap.domains.metadataStore)
 
 scanning:
+  certIssuer: letsencrypt-production
   metadataStore:
     url: ""
     ns_for_export_app_cert: "*"
