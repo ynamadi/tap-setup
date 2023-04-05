@@ -113,6 +113,7 @@ tap_gui:
 metadata_store:
   ns_for_export_app_cert: "*"
   ingress_enabled: "true"
+  use_cert_manager: "true"
   ingress_domain: #@ data.values.tap.domains.main
   ingress_issuer: letsencrypt-production
   tls:
