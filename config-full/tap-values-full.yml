@@ -121,6 +121,9 @@ grype:
   targetImagePullSecret: "registry-credentials"
   metadataStore:
     url: #@ "https://{}".format(data.values.tap.domains.metadataStore)
+    caSecret:
+      name: store-ca-cert
+      importFromNamespace: metadata-store
 
 scanning:
   metadataStore:
