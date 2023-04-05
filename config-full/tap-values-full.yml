@@ -17,7 +17,6 @@ shared:
   ingress_domain: #@ data.values.tap.domains.main
   ingress_issuer: letsencrypt-production
   kubernetes_version: 1.24.6
-  ca_cert_data: #@ data.values.tap.credentials.certificate.ca_cert
 
 ceip_policy_disclosed: true
 buildservice:
@@ -115,9 +114,11 @@ metadata_store:
   ns_for_export_app_cert: "*"
   ingress_enabled: "true"
   ingress_domain: #@ data.values.tap.domains.main
+  ingress_issuer: letsencrypt-production
   tls:
     secretName: tls
     namespace: tanzu-system-ingress
+
 
 grype:
   namespace: #@ data.values.tap.devNamespace
