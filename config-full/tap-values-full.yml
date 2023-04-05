@@ -17,6 +17,7 @@ shared:
   ingress_domain: #@ data.values.tap.domains.main
   ingress_issuer: letsencrypt-production
   kubernetes_version: 1.24.6
+  ca_cert_data: #@ data.values.tap.credentials.certificate.ca_cert
 
 ceip_policy_disclosed: true
 buildservice:
