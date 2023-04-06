@@ -131,6 +131,11 @@ metadata_store:
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
+  metadataStore:
+      url: #@ "https://{}".format(data.values.tap.domains.metadataStore)
+    caSecret:
+      name: tls
+      importFromNamespace: tanzu-system-ingress
 
 scanning:
   metadataStore:

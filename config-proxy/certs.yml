@@ -6,6 +6,7 @@ metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
 spec:
+  isCA: true
   secretName: tls
   privateKey:
       rotationPolicy: Always
