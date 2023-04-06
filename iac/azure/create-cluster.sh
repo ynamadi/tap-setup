@@ -2,7 +2,7 @@
 export AKS_RESOURCE_GROUP="tap-full-rg"
 export AKS_CLUSTER_NAME="tap-full"
 export AKS_CLUSTER_LOCATION="eastus2"
-export AKS_CLUSTER_VERSION="1.24.6"
+export AKS_CLUSTER_VERSION="1.24.10"
 
 az group create -l ${AKS_CLUSTER_LOCATION} -n ${AKS_RESOURCE_GROUP}
 
