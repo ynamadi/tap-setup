@@ -6,6 +6,7 @@ metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
 spec:
+  commonName: y-compiles.com
   isCA: true
   secretName: tls
   privateKey:
@@ -16,6 +17,7 @@ spec:
     - 'metadata-store.tap.tanzu.y-compiles.com'
     - '*.learningcenter.tap.tanzu.y-compiles.com'
   issuerRef:
+    group: cert-manager.io
     name: letsencrypt-production
     kind: ClusterIssuer
 
