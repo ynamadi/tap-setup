@@ -6,7 +6,7 @@ metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
 spec:
-  commonName: y-compiles.com
+  commonName: tap-gui.tap.tanzu.y-compiles.com
   isCA: true
   secretName: tls
   privateKey:
