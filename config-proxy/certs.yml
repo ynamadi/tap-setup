@@ -15,6 +15,7 @@ spec:
     - '*.apps.tap.tanzu.y-compiles.com'
     - 'tap-gui.tap.tanzu.y-compiles.com'
     - 'metadata-store.tap.tanzu.y-compiles.com'
+    - 'api-portal.tap.tanzu.y-compiles.com'
     - '*.learningcenter.tap.tanzu.y-compiles.com'
   issuerRef:
     group: cert-manager.io
@@ -28,12 +29,23 @@ metadata:
   name: tls
   namespace: tanzu-system-ingress
 spec:
-  toNamespace: learningcenter
+  toNamespaces:
+  - learningcenter
+  - api-portal
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
 metadata:
   name: tls
   namespace: learningcenter
+spec:
+  fromNamespace: tanzu-system-ingress
+
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: tls
+  namespace: api-portal
 spec:
   fromNamespace: tanzu-system-ingress
