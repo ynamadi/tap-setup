@@ -109,7 +109,7 @@ scanning:
 
 cnrs:
   domain_name: #@ data.values.tap.domains.knative
-  default_tls_secret: tanzu-system-ingress/tls
+  default_tls_secret: cert-manager/mdanter-ca
   domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
 
 appliveview:
