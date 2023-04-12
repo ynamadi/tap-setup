@@ -8,7 +8,7 @@ tap:
   catalogs: []
 
   registry:
-    host: tapbuild.azurecr.io
+    host: harbor.mdanter.lan
     repositories:
       buildService: repo/build-service
       ootbSupplyChain: repo/supply-chain
