@@ -49,22 +49,6 @@ tap_gui:
     namespace: tanzu-system-ingress
     secretName: tls
   app_config:
-    #!organization:
-      #!name: #@ data.values.tap.credentials.customize.org_name
-    #!customize:
-      #!custom_logo: #@ data.values.tap.credentials.customize.custom_logo
-      #!custom_name: #@ data.values.tap.credentials.customize.custom_name
-    techdocs:
-      builder: 'external'
-      publisher:
-        type: 'awsS3'
-        awsS3:
-          bucketName: #@ data.values.tap.credentials.aws_s3.bucketName
-          credentials:
-            accessKeyId: #@ data.values.tap.credentials.aws_s3.accessKeyId
-            secretAccessKey: #@ data.values.tap.credentials.aws_s3.secretAccessKey
-          region: #@ data.values.tap.credentials.aws_s3.region
-          s3ForcePathStyle: false
     proxy:
       /metadata-store:
         target: https://metadata-store-app.metadata-store:8443/api/v1
