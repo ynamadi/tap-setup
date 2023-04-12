@@ -15,7 +15,7 @@ contour:
 
 shared:
   ingress_domain: #@ data.values.tap.domains.main
-  ingress_issuer: ""
+  ingress_issuer: mdanter-company
   kubernetes_version: 1.24.10
 
 ceip_policy_disclosed: true
