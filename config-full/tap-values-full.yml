@@ -46,8 +46,8 @@ learningcenter:
 tap_gui:
   service_type: ClusterIP
   tls:
-    namespace: tanzu-system-ingress
-    secretName: tls
+    namespace: cert-manager
+    secretName: mdanter-ca
   app_config:
     proxy:
       /metadata-store:
