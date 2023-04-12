@@ -1,0 +1,30 @@
+#@ load("@ytt:yaml", "yaml")
+---
+#@ def config():
+tap:
+
+  registry:
+    username: $REGISTRY_USERNAME
+    password: $REGISTRY_PASSWORD
+    repositories:
+      buildService: tanzu/tanzu-build-service
+      ootbSupplyChain: tanzu/tanzu-supply-chain
+
+  domains:
+    main: tap.tanzu.example.com
+    tapGui: tap-gui.tap.tanzu.example.com
+    learningCenter: learningcenter.tap.tanzu.example.com
+    knative: apps.tap.tanzu.example.com
+    appliveview: appliveview.tap.tanzu.example.com
+    metadataStore: metadata-store.tap.tanzu.example.com
+  maven:
+    url: "https://artifactory.my-organization.example.com/repository/SmcMavenDev"
+#@ end
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tap-install-gitops
+  namespace: tap-install-gitops
+data:
+  tap-config.yml: #@ yaml.encode(config())
