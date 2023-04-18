@@ -16,7 +16,7 @@ contour:
 shared:
   ingress_domain: #@ data.values.tap.domains.main
   ingress_issuer: letsencrypt-production
-  kubernetes_version: 1.24.6
+  kubernetes_version: 1.25.6
 
 ceip_policy_disclosed: true
 buildservice:
