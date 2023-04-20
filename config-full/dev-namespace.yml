@@ -102,6 +102,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/create-strategy: fallback-on-update
 secrets:
   - name: registry-credentials
   - name: git-ssh
