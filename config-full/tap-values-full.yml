@@ -24,6 +24,7 @@ buildservice:
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
   ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert 
+  exclude_dependencies: true
 
 supply_chain: testing_scanning
 
