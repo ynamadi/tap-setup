@@ -12,7 +12,7 @@ metadata:
     kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
 spec:
   delegations:
-    - secretName: #@ data.values.tls.secretName
+    - secretName: #@ data.values.tap.tls.secretName
       targetNamespaces:
         - "*"
 ---
