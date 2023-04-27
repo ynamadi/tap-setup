@@ -4,6 +4,8 @@ kind: Pipeline
 metadata:
   name: angular-test-pipeline
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
   labels:
     apps.tanzu.vmware.com/language: node
     apps.tanzu.vmware.com/pipeline: test-angular

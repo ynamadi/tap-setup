@@ -4,3 +4,6 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-group: "tap-install-namespace"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"

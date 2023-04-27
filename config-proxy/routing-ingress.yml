@@ -7,7 +7,7 @@ metadata:
   name: contour-delegation
   namespace: #@ data.values.tls.namespace
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tap-install/tap"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   delegations:
     - secretName: #@ data.values.tls.secretName
@@ -20,7 +20,7 @@ metadata:
   name: learningcenter
   namespace: learning-center-guided-ui
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tap-install/tap"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   virtualhost:
     fqdn: #@ "learningcenter.{}".format(data.values.domain)

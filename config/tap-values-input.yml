@@ -3,16 +3,14 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 tap:
-  version: "1.4.0"
+  version: "1.5.0"
   namespace: tap-install
-  catalogs: []
+
+  tanzuNet:
+    host: registry.tanzu.vmware.com
 
   registry:
     host: tapbuild.azurecr.io
     repositories:
       buildService: repo/build-service
       ootbSupplyChain: repo/supply-chain
-
-  domains:
-    main: tap.tanzu.y-compiles.com
-    tapGui: tap-gui.tap.tanzu.y-compiles.com

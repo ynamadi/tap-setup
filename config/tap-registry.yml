@@ -5,7 +5,7 @@
 #@ def config():
 #@  return {
 #@    "auths": {
-#@      data.values.tap.credentials.tanzuNet.host: {
+#@      data.values.tap.tanzuNet.host: {
 #@        "username": data.values.tap.credentials.tanzuNet.username,
 #@        "password": data.values.tap.credentials.tanzuNet.password
 #@      }
@@ -18,6 +18,10 @@ kind: Secret
 metadata:
   name: tap-registry
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-group: "tanzu-net-registry"
+    kapp.k14s.io/change-rule.0: "delete after deleting tap-install-namespace"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
 type: kubernetes.io/dockerconfigjson
 stringData:
   .dockerconfigjson: #@ json.encode(config())
@@ -27,6 +31,10 @@ kind: SecretExport
 metadata:
   name: tap-registry
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-group: "tanzu-net-registry"
+    kapp.k14s.io/change-rule.0: "delete after deleting tap-install-namespace"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
 spec:
   toNamespaces:
   - '*'

@@ -4,7 +4,7 @@ metadata:
   name: tap-install-gitops
   namespace: tap-install-gitops
   annotations:
-    kapp.k14s.io/change-group: tap-install-gitops/app
+    kapp.k14s.io/change-group: "tanzu-app-platform"
     kapp.k14s.io/change-rule: "upsert after upserting tap-install-gitops/rbac"
 spec:
   serviceAccountName: tap-install-gitops-sa
@@ -19,6 +19,36 @@ spec:
       paths:
       - config
       - config-full
+      valuesFrom:
+      - configMapRef:
+          name: tap-install-gitops
+      - secretRef:
+          name: tap-install-gitops
+  deploy:
+  - kapp: {}
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: tap-install-configs-gitops
+  namespace: tap-install-gitops
+  annotations:
+    kapp.k14s.io/change-group: "tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting rbac"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
+
+spec:
+  serviceAccountName: tap-install-gitops-sa
+  fetch:
+  - git:
+      url: https://github.com/ynamadi/tap-setup
+      ref: origin/main
+      secretRef:
+        name: tap-install-gitops-github
+  template:
+  - ytt:
+      paths:
       - scan_policies
       - tekton_pipelines
       - config-proxy
@@ -28,4 +58,7 @@ spec:
       - secretRef:
           name: tap-install-gitops
   deploy:
-  - kapp: {}
+  - kapp:
+      rawOptions:
+      - --wait=true
+      - --diff-changes=true

@@ -146,6 +146,8 @@ kind: Secret
 metadata:
   name: tap-values
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: Opaque
 stringData:
   values.yml: #@ yaml.encode(config())
@@ -156,9 +158,10 @@ metadata:
   name: tap
   namespace: #@ data.values.tap.namespace
   annotations:
-    kapp.k14s.io/change-group: tap
-    kapp.k14s.io/change-rule: "upsert after upserting tap-install/rbac"
-    kapp.k14s.io/change-rule.repo: "upsert after upserting tap-install/tap-repo"
+    kapp.k14s.io/change-group: "tap-package-install"
+    kapp.k14s.io/change-rule: "upsert after upserting rbac"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.repo: "upsert after upserting tap-repo"
     ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: "custom-labels"
 spec:
   packageRef:
@@ -176,6 +179,8 @@ kind: Secret
 metadata:
   name: custom-labels
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   add-custom-labels.yml: |
     #@ load("@ytt:overlay", "overlay")
@@ -194,6 +199,8 @@ kind: Secret
 metadata:
   name: my-custom-labels
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   add-my-custom-labels.yml: |
     #@ load("@ytt:overlay", "overlay")

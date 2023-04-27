@@ -5,6 +5,8 @@ kind: Certificate
 metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   commonName: tap-gui.tap.tanzu.y-compiles.com
   isCA: true
@@ -28,6 +30,8 @@ kind: SecretExport
 metadata:
   name: tls
   namespace: tanzu-system-ingress
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   toNamespaces:
   - learningcenter
@@ -38,5 +42,7 @@ kind: SecretImport
 metadata:
   name: tls
   namespace: learningcenter
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   fromNamespace: tanzu-system-ingress

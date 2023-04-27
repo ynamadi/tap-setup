@@ -8,6 +8,9 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-group: "developer-namespace"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 
 ---
 #@ def config():
@@ -26,6 +29,9 @@ kind: Secret
 metadata:
   name: registry-credentials
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-group: "registry-credentials"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: kubernetes.io/dockerconfigjson
 stringData:
   .dockerconfigjson: #@ json.encode(config())
@@ -36,6 +42,8 @@ kind: Secret
 metadata:
   name: cosign-key-pair
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: Opaque
 data:
   cosign.key: #@ data.values.tap.credentials.cosign.cosign_key
@@ -48,6 +56,8 @@ kind: Secret
 metadata:
   name: snyk-token-secret
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 data:
   snyk_token: #@ data.values.tap.credentials.snyk.token
 ---
@@ -56,6 +66,8 @@ kind: Secret
 metadata:
   name: carbonblack-token-secret
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   cbc_api_id: #@ data.values.tap.credentials.carbon_black_scanner.cbc_api_id
   cbc_api_key: #@ data.values.tap.credentials.carbon_black_scanner.cbc_api_key
@@ -69,6 +81,7 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
   annotations:
     tekton.dev/git-0: https://github.com
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: kubernetes.io/basic-auth
 stringData:
   username: #@ data.values.tap.credentials.github.username
@@ -81,6 +94,7 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
   annotations:
     tekton.dev/git-0: https://ynamadi@dev.azure.com
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: kubernetes.io/basic-auth
 stringData:
   username: #@ data.values.tap.credentials.azure_devops.username
@@ -93,6 +107,7 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
   annotations:
     secretgen.carvel.dev/image-pull-secret: ""
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: kubernetes.io/dockerconfigjson
 data:
   .dockerconfigjson: e30K
@@ -104,6 +119,7 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 secrets:
   - name: registry-credentials
   - name: git-ssh
@@ -117,6 +133,8 @@ kind: Role
 metadata:
   name: default
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 rules:
 - apiGroups: [source.toolkit.fluxcd.io]
   resources: [gitrepositories]
@@ -169,6 +187,8 @@ kind: RoleBinding
 metadata:
   name: default
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -183,6 +203,8 @@ kind: RoleBinding
 metadata:
   name: default-permit-deliverable
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -196,6 +218,8 @@ kind: RoleBinding
 metadata:
   name: default-permit-workload
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -208,6 +232,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: service-binding-postgres
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
   labels:
     servicebinding.io/controller: "true"
 rules:
