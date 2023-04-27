@@ -29,7 +29,7 @@ spec:
   virtualhost:
     fqdn: #@ "learningcenter.{}".format(data.values.tap.domains.learningCenter)
     tls:
-      secretName: ##@ data.values.tap.tls.secretName
+      secretName: #@ data.values.tap.tls.secretName
   routes:
     - services:
         - name: learningcenter-portal
