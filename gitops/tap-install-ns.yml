@@ -3,5 +3,5 @@ kind: Namespace
 metadata:
   name: tap-install-gitops
   annotations:
-    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
-    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform-configs"
