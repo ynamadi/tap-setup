@@ -27,9 +27,9 @@ metadata:
     kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
 spec:
   virtualhost:
-    fqdn: #@ "learningcenter.{}".format(data.values.domain)
+    fqdn: #@ "learningcenter.{}".format(data.values.tap.domains.learningCenter)
     tls:
-      secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
+      secretName: ##@ data.values.tap.tls.secretName
   routes:
     - services:
         - name: learningcenter-portal
