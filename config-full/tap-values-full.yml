@@ -113,7 +113,6 @@ tap_gui:
 metadata_store:
   ns_for_export_app_cert: "*"
 
-
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"

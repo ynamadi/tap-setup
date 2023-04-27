@@ -3,6 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   annotations:
+    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
   name: java-maven-test-pipeline2
   namespace: #@ data.values.tap.devNamespace

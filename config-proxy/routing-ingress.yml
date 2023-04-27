@@ -7,6 +7,7 @@ metadata:
   name: contour-delegation
   namespace: #@ data.values.tls.namespace
   annotations:
+    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   delegations:
@@ -20,6 +21,7 @@ metadata:
   name: learningcenter
   namespace: learning-center-guided-ui
   annotations:
+    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 spec:
   virtualhost:

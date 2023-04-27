@@ -7,6 +7,8 @@ kind: ScanPolicy
 metadata:
   name: scan-policy
   namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
   labels:
     'app.kubernetes.io/part-of': 'component-a'
 spec:
