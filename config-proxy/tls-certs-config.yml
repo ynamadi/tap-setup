@@ -6,8 +6,9 @@ metadata:
   name: y-compiles.com
   namespace: tanzu-system-ingress
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
 spec:
   commonName: tap-gui.tap.tanzu.y-compiles.com
   isCA: true
@@ -32,8 +33,9 @@ metadata:
   name: tls
   namespace: tanzu-system-ingress
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
 spec:
   toNamespaces:
   - learningcenter
@@ -45,7 +47,8 @@ metadata:
   name: tls
   namespace: learningcenter
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
 spec:
   fromNamespace: tanzu-system-ingress

@@ -10,7 +10,9 @@ metadata:
   labels:
     'app.kubernetes.io/part-of': 'component-a'
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=component-a'
 spec:
   regoFile: |
