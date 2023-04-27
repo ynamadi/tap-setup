@@ -5,8 +5,8 @@ metadata:
   namespace: tap-install-gitops
   annotations:
     kapp.k14s.io/change-group: "rbac"
-    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform-configs"
-    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tap-install-gitops-namespace"
+    kapp.k14s.io/change-rule.1: "delete after deleting tap-install-gitops-namespace"
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
