@@ -5,7 +5,7 @@ apiVersion: projectcontour.io/v1
 kind: TLSCertificateDelegation
 metadata:
   name: contour-delegation
-  namespace: #@ data.values.tls.namespace
+  namespace: #@ data.values.tap.tls.namespace
   annotations:
     kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
     kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
