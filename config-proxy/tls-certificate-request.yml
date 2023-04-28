@@ -7,9 +7,10 @@ metadata:
   namespace: tanzu-system-ingress
   annotations:
     kapp.k14s.io/change-group: "tls-cert-request"
-    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
-    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
-    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.cert-manager: "upsert after upserting cert-manager"
+    kapp.k14s.io/change-rule.tanzu-app-platform: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.tanzu-app-platform-configs: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.3: "delete after deleting tanzu-app-platform"
 spec:
   commonName: tap-gui.tap.tanzu.y-compiles.com
   isCA: true

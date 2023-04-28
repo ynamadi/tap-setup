@@ -7,11 +7,12 @@ metadata:
   name: learningcenter
   namespace: learning-center-guided-ui
   annotations:
-    kapp.k14s.io/change-rule.0: "upsert after upserting learningcenter"
-    kapp.k14s.io/change-rule.1: "upsert after upserting tls-cert-request"
-    kapp.k14s.io/change-rule.2: "upsert after upserting import-tls-secret-to-learningcenter"
-    kapp.k14s.io/change-rule.3: "upsert after upserting tap-learning-center-config"
-    kapp.k14s.io/change-rule.4: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.0: "upsert after upserting contour"
+    kapp.k14s.io/change-rule.1: "upsert after upserting learningcenter"
+    kapp.k14s.io/change-rule.2: "upsert after upserting tls-cert-request"
+    kapp.k14s.io/change-rule.3: "upsert after upserting import-tls-secret-to-learningcenter"
+    kapp.k14s.io/change-rule.4: "upsert after upserting tap-learning-center-config"
+    kapp.k14s.io/change-rule.5: "delete after deleting tanzu-app-platform"
 spec:
   virtualhost:
     fqdn: #@ "learningcenter.{}".format(data.values.tap.domains.learningCenter)
