@@ -62,3 +62,37 @@ spec:
       rawOptions:
       - --wait=true
       - --diff-changes=true
+
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: tap-learning-center-config
+  namespace: tap-install-gitops
+  annotations:
+    kapp.k14s.io/change-group: "tap-learning-center-config"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
+
+spec:
+  serviceAccountName: tap-install-gitops-sa
+  fetch:
+  - git:
+      url: https://github.com/ynamadi/tap-setup
+      ref: origin/main
+      secretRef:
+        name: tap-install-gitops-github
+  template:
+  - ytt:
+      paths:
+      - learning-center
+      valuesFrom:
+      - configMapRef:
+          name: tap-install-gitops
+      - secretRef:
+          name: tap-install-gitops
+  deploy:
+  - kapp:
+      rawOptions:
+      - --wait=true
+      - --diff-changes=true

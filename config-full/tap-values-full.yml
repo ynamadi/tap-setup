@@ -159,7 +159,8 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: "tap-package-install"
     kapp.k14s.io/change-rule: "upsert after upserting rbac"
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
     kapp.k14s.io/change-rule.repo: "upsert after upserting tap-repo"
     ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: "custom-labels"
 spec:

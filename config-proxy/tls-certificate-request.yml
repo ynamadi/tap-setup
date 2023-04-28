@@ -38,8 +38,7 @@ metadata:
     kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
 spec:
   toNamespaces:
-  - learningcenter
-  - api-portal
+  - '*'
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
