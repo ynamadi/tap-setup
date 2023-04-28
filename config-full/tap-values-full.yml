@@ -158,6 +158,7 @@ metadata:
   namespace: #@ data.values.tap.namespace
   annotations:
     kapp.k14s.io/change-group: "tap-package-install"
+    kapp.k14s.io/change-rule.install-ns: "upsert after upserting tap-install-gitops-namespace"
     kapp.k14s.io/change-rule: "upsert after upserting rbac"
     kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
     kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
@@ -180,6 +181,7 @@ metadata:
   name: custom-labels
   namespace: #@ data.values.tap.namespace
   annotations:
+    kapp.k14s.io/change-rule.install-ns: "upsert after upserting tap-install-gitops-namespace"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   add-custom-labels.yml: |
@@ -200,6 +202,7 @@ metadata:
   name: my-custom-labels
   namespace: #@ data.values.tap.namespace
   annotations:
+    kapp.k14s.io/change-rule.install-ns: "upsert after upserting tap-install-gitops-namespace"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   add-my-custom-labels.yml: |
