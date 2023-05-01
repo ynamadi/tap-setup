@@ -35,44 +35,6 @@ metadata:
 type: kubernetes.io/dockerconfigjson
 stringData:
   .dockerconfigjson: #@ json.encode(config())
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cosign-key-pair
-  namespace: #@ data.values.tap.devNamespace
-  annotations:
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
-type: Opaque
-data:
-  cosign.key: #@ data.values.tap.credentials.cosign.cosign_key
-  cosign.password: #@ data.values.tap.credentials.cosign.cosign_password
-  cosign.pub: #@ data.values.tap.credentials.cosign.cosign_pub
-immutable: true
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: snyk-token-secret
-  namespace: #@ data.values.tap.devNamespace
-  annotations:
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
-data:
-  snyk_token: #@ data.values.tap.credentials.snyk.token
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: carbonblack-token-secret
-  namespace: #@ data.values.tap.devNamespace
-  annotations:
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
-stringData:
-  cbc_api_id: #@ data.values.tap.credentials.carbon_black_scanner.cbc_api_id
-  cbc_api_key: #@ data.values.tap.credentials.carbon_black_scanner.cbc_api_key
-  cbc_org_key: #@ data.values.tap.credentials.carbon_black_scanner.cbc_org_key
-  cbc_saas_url: #@ data.values.tap.credentials.carbon_black_scanner.cbc_saas_url
 ---
 apiVersion: v1
 kind: Secret
@@ -86,19 +48,6 @@ type: kubernetes.io/basic-auth
 stringData:
   username: #@ data.values.tap.credentials.github.username
   password: #@ data.values.tap.credentials.github.token
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: azure-devops-ssh
-  namespace: #@ data.values.tap.devNamespace
-  annotations:
-    tekton.dev/git-0: https://ynamadi@dev.azure.com
-    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
-type: kubernetes.io/basic-auth
-stringData:
-  username: #@ data.values.tap.credentials.azure_devops.username
-  password: #@ data.values.tap.credentials.azure_devops.access_token
 ---
 apiVersion: v1
 kind: Secret
@@ -123,7 +72,6 @@ metadata:
 secrets:
   - name: registry-credentials
   - name: git-ssh
-  - name: cosign-key-pair
 imagePullSecrets:
 - name: tap-registry
 - name: registry-credentials
