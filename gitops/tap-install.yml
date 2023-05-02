@@ -52,7 +52,6 @@ spec:
       - scan_policies
       - tekton_pipelines
       - config-proxy
-      - scanning-tools
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops
