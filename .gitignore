@@ -15,7 +15,7 @@
 # vendor/
 /gitops/tap-install-config.yml.tmp
 /gitops/tap-install-secrets.yml.tmp
-/cluster-essentials.sh
+tanzu-cluster-essentials
 /eks-cluster-setup.sh
 /aks-cluster-setup.sh
 /.idea/
@@ -28,3 +28,6 @@
 insight-ca.crt
 /custom-supply-chains/source-to-url.yaml
 custom-supply-chains/source-test-to-url.yaml
+/iac/aws/add-ebs-csi-driver.sh
+/iac/aws/remove-ebs-csi-driver.sh
+/cluster-essentials.sh
