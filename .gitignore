@@ -13,10 +13,14 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-/cluster-essentials.sh
+/gitops/tap-install-config.yml.tmp
+/gitops/tap-install-secrets.yml.tmp
+tanzu-cluster-essentials
 /eks-cluster-setup.sh
 /aks-cluster-setup.sh
 /.idea/
+/gitops/tap-install-config.yml.tmp
+/gitops/tap-install-secrets.yml.tmp
 /gitops/tap-install-secrets.yml
 /gitops/tap-install-config.yml
 /azure-dns-setup.sh
@@ -24,3 +28,6 @@
 insight-ca.crt
 /custom-supply-chains/source-to-url.yaml
 custom-supply-chains/source-test-to-url.yaml
+/iac/aws/add-ebs-csi-driver.sh
+/iac/aws/remove-ebs-csi-driver.sh
+/cluster-essentials.sh

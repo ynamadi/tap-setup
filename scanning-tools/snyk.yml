@@ -1,9 +1,12 @@
 #@ load("@ytt:data", "data")
+
 ---
 apiVersion: v1
-kind: Namespace
+kind: Secret
 metadata:
-  name: #@ data.values.tap.namespace
+  name: snyk-token-secret
+  namespace: #@ data.values.tap.devNamespace
   annotations:
-    kapp.k14s.io/change-group: "tap-install-namespace"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+data:
+  snyk_token: #@ data.values.tap.credentials.snyk.token

@@ -15,15 +15,15 @@ contour:
 
 shared:
   ingress_domain: #@ data.values.tap.domains.main
-  ingress_issuer: mdanter-company
-  kubernetes_version: 1.24.10
+  ingress_issuer: letsencrypt-production
+  kubernetes_version: #@ data.values.tap.kubernetesVersion
 
 ceip_policy_disclosed: true
 buildservice:
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
-  ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert 
+  ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
   exclude_dependencies: true
 
 supply_chain: testing_scanning
@@ -99,7 +99,6 @@ tap_gui:
 metadata_store:
   ns_for_export_app_cert: "*"
 
-
 grype:
   namespace: #@ data.values.tap.devNamespace
   targetImagePullSecret: "registry-credentials"
@@ -132,6 +131,8 @@ kind: Secret
 metadata:
   name: tap-values
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 type: Opaque
 stringData:
   values.yml: #@ yaml.encode(config())
@@ -142,9 +143,12 @@ metadata:
   name: tap
   namespace: #@ data.values.tap.namespace
   annotations:
-    kapp.k14s.io/change-group: tap
-    kapp.k14s.io/change-rule: "upsert after upserting tap-install/rbac"
-    kapp.k14s.io/change-rule.repo: "upsert after upserting tap-install/tap-repo"
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group: "tap-package-install"
+    kapp.k14s.io/change-rule: "upsert after upserting rbac"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
+    kapp.k14s.io/change-rule.repo: "upsert after upserting tap-repo"
     ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: "custom-labels"
 spec:
   packageRef:
@@ -162,6 +166,9 @@ kind: Secret
 metadata:
   name: custom-labels
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.install-ns: "upsert after upserting tap-install-gitops-namespace"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   add-custom-labels.yml: |
     #@ load("@ytt:overlay", "overlay")
@@ -180,6 +187,9 @@ kind: Secret
 metadata:
   name: my-custom-labels
   namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.install-ns: "upsert after upserting tap-install-gitops-namespace"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 stringData:
   add-my-custom-labels.yml: |
     #@ load("@ytt:overlay", "overlay")

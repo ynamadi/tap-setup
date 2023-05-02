@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
+---
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: contour-delegation
+  namespace: #@ data.values.tap.tls.namespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting contour"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.2: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.3: "delete after deleting tanzu-app-platform"
+spec:
+  delegations:
+    - secretName: #@ data.values.tap.tls.secretName
+      targetNamespaces:
+        - "*"

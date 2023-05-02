@@ -6,10 +6,12 @@ metadata:
   name: tanzu-tap-repository
   namespace: #@ data.values.tap.namespace
   annotations:
-    kapp.k14s.io/change-group: tap-install/tap-repo
+    kapp.k14s.io/change-group: "tap-repo"
+    kapp.k14s.io/change-rule.0: "delete after deleting tap-install-namespace"
+    kapp.k14s.io/change-rule.1: "delete after deleting tanzu-app-platform"
 spec:
   fetch:
     imgpkgBundle:
-      image: #@ "{}/tanzu-application-platform/tap-packages:{}".format(data.values.tap.credentials.tanzuNet.host, data.values.tap.version)
+      image: #@ "{}/tanzu-application-platform/tap-packages:{}".format(data.values.tap.tanzuNet.host, data.values.tap.version)
       secretRef:
         name: tap-registry

@@ -1,0 +1,25 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: learningcenter
+  namespace: learning-center-guided-ui
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting contour"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tap-install-gitops-namespace"
+    kapp.k14s.io/change-rule.2: "upsert after upserting learningcenter"
+    kapp.k14s.io/change-rule.3: "upsert after upserting tls-cert-request"
+    kapp.k14s.io/change-rule.4: "upsert after upserting import-tls-secret-to-learningcenter"
+    kapp.k14s.io/change-rule.5: "upsert after upserting tap-learning-center-config"
+    kapp.k14s.io/change-rule.6: "delete after deleting tanzu-app-platform"
+spec:
+  virtualhost:
+    fqdn: #@ "learningcenter.{}".format(data.values.tap.domains.learningCenter)
+    tls:
+      secretName: #@ data.values.tap.tls.secretName
+  routes:
+    - services:
+        - name: learningcenter-portal
+          port: 8080

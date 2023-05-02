@@ -1,0 +1,56 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: y-compiles.com
+  namespace: tanzu-system-ingress
+  annotations:
+    kapp.k14s.io/change-group: "tls-cert-request"
+    kapp.k14s.io/change-rule.cert-manager: "upsert after upserting cert-manager"
+    kapp.k14s.io/change-rule.tanzu-app-platform: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.tanzu-app-platform-configs: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.3: "delete after deleting tanzu-app-platform"
+spec:
+  commonName: tap-gui.tap.tanzu.y-compiles.com
+  isCA: true
+  secretName: tls
+  privateKey:
+      rotationPolicy: Always
+  dnsNames:
+    - '*.apps.tap.tanzu.y-compiles.com'
+    - 'tap-gui.tap.tanzu.y-compiles.com'
+    - 'metadata-store.tap.tanzu.y-compiles.com'
+    - 'api-portal.tap.tanzu.y-compiles.com'
+    - '*.learningcenter.tap.tanzu.y-compiles.com'
+  issuerRef:
+    group: cert-manager.io
+    name: letsencrypt-production
+    kind: ClusterIssuer
+
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretExport
+metadata:
+  name: tls
+  namespace: tanzu-system-ingress
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
+spec:
+  toNamespaces:
+  - '*'
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: tls
+  namespace: learningcenter
+  annotations:
+    kapp.k14s.io/change-group: "import-tls-secret-to-learningcenter"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
+spec:
+  fromNamespace: tanzu-system-ingress

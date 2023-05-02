@@ -6,16 +6,16 @@ metadata:
   name: tap-default-sa
   namespace: #@ data.values.tap.namespace
   annotations:
-    kapp.k14s.io/change-group: tap-install/rbac
-    kapp.k14s.io/change-rule: "delete after deleting tap-install/tap"
+    kapp.k14s.io/change-group: "rbac"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: tap-default-role
   annotations:
-    kapp.k14s.io/change-group: tap-install/rbac
-    kapp.k14s.io/change-rule: "delete after deleting tap-install/tap"
+    kapp.k14s.io/change-group: "rbac"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 rules:
 - apiGroups: ["*"]
   resources: ["*"]
@@ -26,8 +26,8 @@ kind: ClusterRoleBinding
 metadata:
   name: tap-default-role-binding
   annotations:
-    kapp.k14s.io/change-group: tap-install/rbac
-    kapp.k14s.io/change-rule: "delete after deleting tap-install/tap"
+    kapp.k14s.io/change-group: "rbac"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
 subjects:
 - kind: ServiceAccount
   name: tap-default-sa

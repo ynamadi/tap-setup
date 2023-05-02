@@ -1,4 +1,6 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:base64", "base64")
+#@ load("@ytt:json", "json")
 ---
 apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
@@ -8,6 +10,10 @@ metadata:
   labels:
     'app.kubernetes.io/part-of': 'component-a'
   annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting scancontroller"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.2: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.3: "delete after deleting tanzu-app-platform"
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=component-a'
 spec:
   regoFile: |

@@ -1,0 +1,14 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: carbonblack-token-secret
+  namespace: #@ data.values.tap.devNamespace
+  annotations:
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+stringData:
+  cbc_api_id: #@ data.values.tap.credentials.carbon_black_scanner.cbc_api_id
+  cbc_api_key: #@ data.values.tap.credentials.carbon_black_scanner.cbc_api_key
+  cbc_org_key: #@ data.values.tap.credentials.carbon_black_scanner.cbc_org_key
+  cbc_saas_url: #@ data.values.tap.credentials.carbon_black_scanner.cbc_saas_url
