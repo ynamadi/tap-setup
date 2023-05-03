@@ -72,6 +72,9 @@ tap_gui:
     supplyChain:
       enablePlugin: true
     backend:
+      reading:
+         allow:
+         - host: github.com
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
       cors:
         origin: #@ "https://{}".format(data.values.tap.domains.tapGui)
