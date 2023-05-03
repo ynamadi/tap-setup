@@ -16,6 +16,7 @@ contour:
 shared:
   ingress_domain: #@ data.values.tap.domains.main
   kubernetes_version: #@ data.values.tap.kubernetesVersion
+  ingress_issuer: ""
 
 ceip_policy_disclosed: true
 buildservice:
