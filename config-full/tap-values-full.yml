@@ -60,7 +60,7 @@ tap_gui:
           Authorization: #@ data.values.tap.credentials.metadataStore.accessToken
           X-Custom-Source: project-star
     app:
-      baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
+      baseUrl: #@ "http://{}".format(data.values.tap.domains.tapGui)
     integrations:
       #@ if "github" in data.values.tap.credentials and "token" in data.values.tap.credentials.github:
       github:
@@ -76,9 +76,9 @@ tap_gui:
       reading:
          allow:
          - host: github.com
-      baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
+      baseUrl: #@ "http://{}".format(data.values.tap.domains.tapGui)
       cors:
-        origin: #@ "https://{}".format(data.values.tap.domains.tapGui)
+        origin: #@ "http://{}".format(data.values.tap.domains.tapGui)
     #@ if "github" in data.values.tap.credentials and "clientId" in data.values.tap.credentials.github and "clientSecret" in data.values.tap.credentials.github:
     auth:
       environment: development
