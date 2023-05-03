@@ -78,17 +78,6 @@ tap_gui:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
       cors:
         origin: #@ "https://{}".format(data.values.tap.domains.tapGui)
-      #@ if "backstage" in data.values.tap.credentials and "database" in data.values.tap.credentials.backstage:
-      backend:
-        database:
-          client: #@ data.values.tap.credentials.backstage.database.client
-          connection:
-            host: #@ data.values.tap.credentials.backstage.database.host
-            port: #@ data.values.tap.credentials.backstage.database.port
-            user: #@ data.values.tap.credentials.backstage.database.username
-            password: #@ data.values.tap.credentials.backstage.database.password
-            ssl: {rejectUnauthorized: true}
-      #@ end
     #@ if "github" in data.values.tap.credentials and "clientId" in data.values.tap.credentials.github and "clientSecret" in data.values.tap.credentials.github:
     auth:
       environment: development
