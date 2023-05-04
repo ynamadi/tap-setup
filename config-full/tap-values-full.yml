@@ -116,6 +116,7 @@ package_overlays:
 - name: tap-gui
   secrets:
   - name: k8s-reader-overlay
+  - name: adjust-liveness-probe-tap-gui
 #@ end
 ---
 apiVersion: v1
@@ -195,3 +196,31 @@ stringData:
         istio-injection: "false"
         #@overlay/match missing_ok=True
         tmc-policy: "false"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: adjust-liveness-probe-tap-gui
+  namespace: #@ data.values.tap.namespace
+  annotations:
+    kapp.k14s.io/change-rule.install-ns: "upsert after upserting tap-install-gitops-namespace"
+    kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
+stringData:
+  add-my-custom-labels.yml: |
+    #@ load("@ytt:overlay", "overlay")
+    #! makes an assumption that tap-gui is deployed in the namespace: "tap-gui"
+    #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "server", "namespace": "tap-gui"}}), expects="1+"
+    ---
+    spec:
+      template:
+        spec:
+          containers:
+            #@overlay/match by=overlay.subset({"name": "backstage"}),expects="1+"
+            #@overlay/match-child-defaults missing_ok=True
+            - readinessProbe:
+              failureThreshold: 3
+              #@overlay/remove
+              successThreshold: 3
+            livenessProbe:
+              failureThreshold: 6
+
