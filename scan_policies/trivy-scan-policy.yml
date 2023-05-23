@@ -1,0 +1,50 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
+kind: ScanPolicy
+metadata:
+   name: trivy-scan-policy
+   namespace: #@ data.values.tap.devNamespace
+   labels:
+      app.kubernetes.io/part-of: enable-in-gui
+spec:
+   regoFile: |
+      package main
+
+      import future.keywords.in
+      import future.keywords.every
+
+      # Accepted Values: "critical", "high", "medium", "low", unknown"
+      notAllowedSeverities := ["critical", "high", "unknown"]
+      notAllowedSet := {x | x := notAllowedSeverities[_]}
+      ignoreCves := []
+
+      isSafe(match) {
+        severities := { e | e := match.ratings.rating.severity } | { e | e := match.ratings.rating[_].severity }
+        every severity in severities {
+            not severity in notAllowedSet
+        }
+      }
+
+      isIgnored(match) {
+        match.id in ignoreCves
+      }
+
+      deny[msg] {
+        notAllowedVulnerabilities := { vulnerability |
+          vulnerabilities := {e | e := input.bom.vulnerabilities.vulnerability} | {e | e := input.bom.vulnerabilities.vulnerability[_]}
+          some vulnerability in vulnerabilities
+          not isIgnored(vulnerability)
+          not isSafe(vulnerability)
+        }
+        formattedVulnerabilityMessages := { message |
+          some vulnerability in notAllowedVulnerabilities
+          ratings := {e | e := vulnerability.ratings.rating.severity} | {e | e := vulnerability.ratings.rating[_].severity}
+          formattedRatings := concat(", ", ratings)
+          affectedComponents := {e | e := vulnerability.affects.target.ref} | {e | e := vulnerability.affects.target[_].ref}
+          formattedComponents := concat("\\n", affectedComponents)
+          message = sprintf("CVE: %s \\nRatings: %s\\nAffected Components: \\n%s", [vulnerability.id, formattedRatings, formattedComponents])
+        }
+        some formattedVulnerabilityMessage in formattedVulnerabilityMessages
+        msg := formattedVulnerabilityMessage
+      }
