@@ -1,1 +1,1 @@
-tanzu package install trivy-scanner -p trivy.scanning.apps.tanzu.vmware.com --version 0.1.0-alpha.19 --namespace tap-install --values-file values.yml
+tanzu package install trivy-scanner -p trivy.scanning.apps.tanzu.vmware.com --version 0.1.4-alpha.6 --namespace tap-install --values-file values.yml

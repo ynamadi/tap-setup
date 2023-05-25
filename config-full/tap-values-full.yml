@@ -35,8 +35,11 @@ ootb_supply_chain_testing_scanning:
     ssh_secret: git-ssh
   scanning:
     image:
-      template: trivy-private-image-scan-template
-      policy: trivy-scan-policy
+      template: private-image-scan-template
+      policy: scan-policy
+    source:
+      template: blob-source-scan-template
+      policy: scan-policy
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter

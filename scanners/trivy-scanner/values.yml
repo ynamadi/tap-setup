@@ -1,5 +1,5 @@
 namespace: tap-dev
-targetImagePullSecret: "registry-credentials"
+targetImagePullSecret: registry-credentials
 metadataStore:
   caSecret:
     importFromNamespace: ""
