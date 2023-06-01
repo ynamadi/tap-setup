@@ -8,6 +8,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: #@ data.values.tap.devNamespace
+  labels:
+    policy.sigstore.dev/include: true
   annotations:
     kapp.k14s.io/change-group: "developer-namespace"
     kapp.k14s.io/change-rule.0: "delete after deleting tanzu-app-platform"
