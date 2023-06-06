@@ -121,6 +121,7 @@ grype:
   targetImagePullSecret: "registry-credentials"
 
 scanning:
+  certIssuer: "tap-ingress-selfsigned"
   metadataStore:
     url: ""
     ns_for_export_app_cert: "*"
