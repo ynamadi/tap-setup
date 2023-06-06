@@ -33,7 +33,7 @@ spec:
         type: string
       spec: null
       steps:
-      - image: tapbuild.azurecr.io/library/gradle:latest
+      - image: gradle
         name: test
         resources: {}
         script: |-
