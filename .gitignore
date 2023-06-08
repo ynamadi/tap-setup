@@ -31,3 +31,4 @@ custom-supply-chains/source-test-to-url.yaml
 /iac/aws/add-ebs-csi-driver.sh
 /iac/aws/remove-ebs-csi-driver.sh
 /cluster-essentials.sh
+/cosign-config.sh
