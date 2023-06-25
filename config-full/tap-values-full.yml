@@ -69,13 +69,6 @@ tap_gui:
             secretAccessKey: #@ data.values.tap.credentials.aws_s3.secretAccessKey
           region: #@ data.values.tap.credentials.aws_s3.region
           s3ForcePathStyle: false
-    proxy:
-      /metadata-store:
-        target: https://metadata-store-app.metadata-store:8443/api/v1
-        changeOrigin: true
-        secure: false
-        headers:
-          X-Custom-Source: project-star
     app:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
     integrations:
