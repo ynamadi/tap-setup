@@ -13,30 +13,24 @@ metadata:
   namespace: #@ data.values.tap.devNamespace
 spec:
   params:
-  - name: source-url
-    type: string
-  - name: source-revision
-    type: string
-  tasks:
-  - name: node-test
-    params:
     - name: source-url
-      value: $(params.source-url)
     - name: source-revision
-      value: $(params.source-revision)
-    taskSpec:
-      metadata: {}
+  tasks:
+    - name: test
       params:
-      - name: source-url
-        type: string
-      - name: source-revision
-        type: string
-      spec: null
-      steps:
-      - image: node
-        name: test
-        resources: {}
-        script: |-
-          cd `mktemp -d`
-          wget -qO- $(params.source-url) | tar xvz -m
-          npm install-test
+        - name: source-url
+          value: $(params.source-url)
+        - name: source-revision
+          value: $(params.source-revision)
+      taskSpec:
+        params:
+          - name: source-url
+          - name: source-revision
+        steps:
+          - name: react-test
+            image: react-test-with-pact:node-19
+            script: |-
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
+              npm install
+              npm run test -- --watchAll=false
