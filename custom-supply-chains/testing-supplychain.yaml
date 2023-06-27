@@ -1,11 +1,13 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: testing-image-to-url
+  name: source-test-to-url
 spec:
   params:
   - default: ""
     name: ca_cert_data
+  - name: maven_repository_url
+    value: https://repo.maven.apache.org/maven2
   - default: main
     name: gitops_branch
   - default: supplychain
@@ -19,13 +21,55 @@ spec:
   - default: ""
     name: gitops_commit_branch
   resources:
+  - name: source-provider
+    params:
+    - default: default
+      name: serviceAccount
+    - default: libgit2
+      name: gitImplementation
+    templateRef:
+      kind: ClusterSourceTemplate
+      name: source-template
+  - name: source-tester
+    sources:
+    - name: source
+      resource: source-provider
+    templateRef:
+      kind: ClusterSourceTemplate
+      name: testing-pipeline
   - name: image-provider
     params:
     - default: default
       name: serviceAccount
+    - name: registry
+      value:
+        ca_cert_data: ""
+        repository: tanzu/tanzu-supply-chain
+        server: tapbuild.azurecr.io
+    - default: default
+      name: clusterBuilder
+    - default: ./Dockerfile
+      name: dockerfile
+    - default: ./
+      name: docker_build_context
+    - default: []
+      name: docker_build_extra_args
+    sources:
+    - name: source
+      resource: source-tester
     templateRef:
       kind: ClusterImageTemplate
-      name: image-provider-template
+      options:
+      - name: kpack-template
+        selector:
+          matchFields:
+          - key: spec.params[?(@.name=="dockerfile")]
+            operator: DoesNotExist
+      - name: kaniko-template
+        selector:
+          matchFields:
+          - key: spec.params[?(@.name=="dockerfile")]
+            operator: Exists
   - images:
     - name: image
       resource: image-provider
@@ -105,6 +149,3 @@ spec:
     - web
     - server
     - worker
-  selectorMatchFields:
-  - key: spec.image
-    operator: Exists
