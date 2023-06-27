@@ -53,6 +53,7 @@ spec:
       - tekton_pipelines
       - config-proxy
       - scanning-tools
+      - learning-center
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops
