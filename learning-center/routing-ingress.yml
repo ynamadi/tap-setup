@@ -5,7 +5,7 @@ apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
   name: learningcenter
-  namespace: learning-center-guided-ui
+  namespace: learningcenter-guided-ui
   annotations:
     kapp.k14s.io/change-rule.0: "upsert after upserting contour"
     kapp.k14s.io/change-rule.1: "upsert after upserting tap-install-gitops-namespace"
