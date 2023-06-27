@@ -24,9 +24,9 @@ buildservice:
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
 
-supply_chain: testing
+supply_chain: testing_scanning
 
-ootb_supply_chain_testing:
+ootb_supply_chain_testing_scanning:
   registry:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain

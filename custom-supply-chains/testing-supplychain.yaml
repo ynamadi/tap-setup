@@ -1,0 +1,110 @@
+apiVersion: carto.run/v1alpha1
+kind: ClusterSupplyChain
+metadata:
+  name: testing-image-to-url
+spec:
+  params:
+  - default: ""
+    name: ca_cert_data
+  - default: main
+    name: gitops_branch
+  - default: supplychain
+    name: gitops_user_name
+  - default: supplychain
+    name: gitops_user_email
+  - default: supplychain@cluster.local
+    name: gitops_commit_message
+  - default: git-ssh
+    name: gitops_ssh_secret
+  - default: ""
+    name: gitops_commit_branch
+  resources:
+  - name: image-provider
+    params:
+    - default: default
+      name: serviceAccount
+    templateRef:
+      kind: ClusterImageTemplate
+      name: image-provider-template
+  - images:
+    - name: image
+      resource: image-provider
+    name: config-provider
+    params:
+    - default: default
+      name: serviceAccount
+    templateRef:
+      kind: ClusterConfigTemplate
+      name: convention-template
+  - configs:
+    - name: config
+      resource: config-provider
+    name: app-config
+    templateRef:
+      kind: ClusterConfigTemplate
+      options:
+      - name: config-template
+        selector:
+          matchLabels:
+            apps.tanzu.vmware.com/workload-type: web
+      - name: server-template
+        selector:
+          matchLabels:
+            apps.tanzu.vmware.com/workload-type: server
+      - name: worker-template
+        selector:
+          matchLabels:
+            apps.tanzu.vmware.com/workload-type: worker
+  - configs:
+    - name: app_def
+      resource: app-config
+    name: service-bindings
+    templateRef:
+      kind: ClusterConfigTemplate
+      name: service-bindings
+  - configs:
+    - name: app_def
+      resource: service-bindings
+    name: api-descriptors
+    templateRef:
+      kind: ClusterConfigTemplate
+      name: api-descriptors
+  - configs:
+    - name: config
+      resource: api-descriptors
+    name: config-writer
+    params:
+    - default: default
+      name: serviceAccount
+    - name: registry
+      value:
+        ca_cert_data: ""
+        repository: tanzu/tanzu-supply-chain
+        server: tapbuild.azurecr.io
+    templateRef:
+      kind: ClusterTemplate
+      name: config-writer-template
+  - name: deliverable
+    params:
+    - name: registry
+      value:
+        ca_cert_data: ""
+        repository: tanzu/tanzu-supply-chain
+        server: tapbuild.azurecr.io
+    - default: libgit2
+      name: gitImplementation
+    templateRef:
+      kind: ClusterTemplate
+      name: deliverable-template
+  selector:
+    apps.mutualofomaha.com/testing-supply-chain: "true"
+  selectorMatchExpressions:
+  - key: apps.tanzu.vmware.com/workload-type
+    operator: In
+    values:
+    - web
+    - server
+    - worker
+  selectorMatchFields:
+  - key: spec.image
+    operator: Exists
