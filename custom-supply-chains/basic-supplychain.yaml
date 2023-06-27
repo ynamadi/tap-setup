@@ -1,9 +1,11 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: basic-image-to-url
+  name: source-to-url
 spec:
   params:
+  - name: maven_repository_url
+    value: https://repo.maven.apache.org/maven2
   - default: ""
     name: ca_cert_data
   - default: main
@@ -19,13 +21,48 @@ spec:
   - default: ""
     name: gitops_commit_branch
   resources:
+  - name: source-provider
+    params:
+    - default: default
+      name: serviceAccount
+    - default: libgit2
+      name: gitImplementation
+    templateRef:
+      kind: ClusterSourceTemplate
+      name: source-template
   - name: image-provider
     params:
     - default: default
       name: serviceAccount
+    - name: registry
+      value:
+        ca_cert_data: ""
+        repository: tanzu/tanzu-supply-chain
+        server: tapbuild.azurecr.io
+    - default: default
+      name: clusterBuilder
+    - default: ./Dockerfile
+      name: dockerfile
+    - default: ./
+      name: docker_build_context
+    - default: []
+      name: docker_build_extra_args
+    sources:
+    - name: source
+      resource: source-provider
     templateRef:
       kind: ClusterImageTemplate
-      name: image-provider-template
+      options:
+      - name: kpack-template
+        selector:
+          matchFields:
+          - key: spec.params[?(@.name=="dockerfile")]
+            operator: DoesNotExist
+      - name: kaniko-template
+        selector:
+          matchFields:
+          - key: spec.params[?(@.name=="dockerfile")]
+            operator: Exists
   - images:
     - name: image
       resource: image-provider
@@ -107,6 +144,3 @@ spec:
     - worker
   - key: apps.tanzu.vmware.com/carvel-package-workflow
     operator: DoesNotExist
-  selectorMatchFields:
-  - key: spec.image
-    operator: Exists
