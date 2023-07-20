@@ -33,3 +33,4 @@ custom-supply-chains/source-test-to-url.yaml
 /cluster-essentials.sh
 /cosign-config.sh
 /cosign.pub
+dns.h2o.vmware.com.cer
