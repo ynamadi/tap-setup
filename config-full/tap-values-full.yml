@@ -15,11 +15,12 @@ contour:
 
 shared:
   ingress_domain: #@ data.values.tap.domains.main
-  ingress_issuer: letsencrypt-production
+  ingress_issuer: ""
   kubernetes_version: #@ data.values.tap.kubernetesVersion
 
 ceip_policy_disclosed: true
 buildservice:
+  ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
@@ -58,17 +59,6 @@ tap_gui:
     #!customize:
       #!custom_logo: #@ data.values.tap.credentials.customize.custom_logo
       #!custom_name: #@ data.values.tap.credentials.customize.custom_name
-    techdocs:
-      builder: 'external'
-      publisher:
-        type: 'awsS3'
-        awsS3:
-          bucketName: #@ data.values.tap.credentials.aws_s3.bucketName
-          credentials:
-            accessKeyId: #@ data.values.tap.credentials.aws_s3.accessKeyId
-            secretAccessKey: #@ data.values.tap.credentials.aws_s3.secretAccessKey
-          region: #@ data.values.tap.credentials.aws_s3.region
-          s3ForcePathStyle: false
     app:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
     integrations:

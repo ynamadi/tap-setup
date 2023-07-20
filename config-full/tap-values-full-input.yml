@@ -5,14 +5,14 @@
 tap:
   devNamespace: tap-dev
   domains:
-    learningCenter: learningcenter.tap.tanzu.y-compiles.com
-    knative: apps.tap.tanzu.y-compiles.com
-    metadataStore: metadata-store.tap.tanzu.y-compiles.com:443
+    learningCenter: learningcenter.dapo.tap.tanzu.h2o-4-9446.h2o.vmware.com
+    knative: apps.dapo.tap.tanzu.h2o-4-9446.h2o.vmware.com
+    metadataStore: metadata-store.dapo.tap.tanzu.h2o-4-9446.h2o.vmware.com:443
     appliveview:
-          host: appliveview.tap.tanzu.y-compiles.com
+          host: appliveview.tap.tanzu.h2o-4-9446.h2o.vmware.com
           port: 443
 
-domain: tap.tanzu.y-compiles.com
+domain: tap.dapo.tanzu.h2o-4-9446.h2o.vmware.com
 tls:
   secretName: tls
   namespace: tanzu-system-ingress

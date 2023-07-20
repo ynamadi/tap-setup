@@ -11,7 +11,7 @@ spec:
   fetch:
   - git:
       url: https://github.com/ynamadi/tap-setup
-      ref: origin/main
+      ref: origin/dapo-tap-install
       secretRef:
         name: tap-install-gitops-github
   template:
@@ -43,7 +43,7 @@ spec:
   fetch:
   - git:
       url: https://github.com/ynamadi/tap-setup
-      ref: origin/main
+      ref: origin/dapo-tap-install
       secretRef:
         name: tap-install-gitops-github
   template:
@@ -52,8 +52,6 @@ spec:
       - scan_policies
       - tekton_pipelines
       - config-proxy
-      - scanning-tools
-      - learning-center
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops
