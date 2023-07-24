@@ -1,6 +1,7 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:base64", "base64")
 #@ load("@ytt:json", "json")
+#@ load("@ytt:yaml", "yaml")
 ---
 #@ def config():
 #@  return {
