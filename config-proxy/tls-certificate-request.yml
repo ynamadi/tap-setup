@@ -18,11 +18,11 @@ spec:
   privateKey:
       rotationPolicy: Always
   dnsNames:
-    - '*.apps.tap.tanzu.y-compiles.com'
-    - 'tap-gui.tap.tanzu.y-compiles.com'
-    - 'metadata-store.tap.tanzu.y-compiles.com'
-    - 'api-portal.tap.tanzu.y-compiles.com'
-    - '*.learningcenter.tap.tanzu.y-compiles.com'
+    - '*.apps.dapo.tap.h2o-4-9446.h2o.vmware.com'
+    - 'tap-gui.dapo.tap.h2o-4-9446.h2o.vmware.com'
+    - 'metadata-store.dapo.tap.h2o-4-9446.h2o.vmware.com'
+    - 'api-portal.dapo.tap.h2o-4-9446.h2o.vmware.com'
+    - '*.learningcenter.dapo.tap.h2o-4-9446.h2o.vmware.com'
   issuerRef:
     group: cert-manager.io
     name: letsencrypt-production
