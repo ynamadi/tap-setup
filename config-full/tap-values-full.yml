@@ -14,6 +14,7 @@ contour:
       type: LoadBalancer
 
 shared:
+  ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
   ingress_domain: #@ data.values.tap.domains.main
   ingress_issuer: ""
   kubernetes_version: #@ data.values.tap.kubernetesVersion
@@ -51,9 +52,6 @@ learningcenter:
 tap_gui:
   metadataStoreAutoconfiguration: true
   service_type: ClusterIP
-  tls:
-    namespace: tanzu-system-ingress
-    secretName: tls
   app_config:
     #!organization:
       #!name: #@ data.values.tap.credentials.customize.org_name
