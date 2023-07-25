@@ -86,6 +86,9 @@ tap_gui:
       baseUrl: #@ "https://{}".format(data.values.tap.domains.tapGui)
       cors:
         origin: #@ "https://{}".format(data.values.tap.domains.tapGui)
+      reading:
+        allow:
+        - host: 'where-for-dinner.apps.tap.tanzu.y-compiles.com'
       #@ if "backstage" in data.values.tap.credentials and "database" in data.values.tap.credentials.backstage:
       backend:
         database:
