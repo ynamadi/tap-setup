@@ -27,6 +27,17 @@ buildservice:
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
   exclude_dependencies: true
 
+supply_chain: basic
+
+ootb_supply_chain_basic:
+  registry:
+    server: #@ data.values.tap.registry.host
+    repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
+  git_implementation: libgit2
+  gitops:
+    ssh_secret: git-ssh
+
+
 supply_chain: testing_scanning
 
 ootb_supply_chain_testing_scanning:
