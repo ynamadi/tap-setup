@@ -31,7 +31,7 @@ supply_chain: basic
 
 ootb_supply_chain_basic:
   registry:
-    server: #@ data.values.tap.tanzuNet.host
+    server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
   git_implementation: libgit2
   gitops:
