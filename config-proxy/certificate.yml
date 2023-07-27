@@ -15,5 +15,6 @@ spec:
  secretName: tap-gui-cert
  dnsNames:
  - tap-gui.dapo.tap.h2o-4-9446.h2o.vmware.com
+ - harbor-dapo.h2o-4-9446.h2o.vmware.com
  issuerRef:
    name: ca-issuer
