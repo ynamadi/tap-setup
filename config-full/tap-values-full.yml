@@ -38,22 +38,22 @@ ootb_supply_chain_basic:
     ssh_secret: git-ssh
 
 
-supply_chain: testing_scanning
+ #! supply_chain: testing_scanning
 
-ootb_supply_chain_testing_scanning:
-  registry:
-    server: #@ data.values.tap.registry.host
-    repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
-  git_implementation: libgit2
-  gitops:
-    ssh_secret: git-ssh
-  scanning:
-    image:
-      template: private-image-scan-template
-      policy: scan-policy
-    source:
-      template: blob-source-scan-template
-      policy: scan-policy
+#! ootb_supply_chain_testing_scanning:
+  #! registry:
+    #! server: #@ data.values.tap.registry.host
+    #! repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
+  #! git_implementation: libgit2
+  #! gitops:
+    #! ssh_secret: git-ssh
+  #! scanning:
+    #! image:
+      #! template: private-image-scan-template
+      #! policy: scan-policy
+     #! source:
+      #! template: blob-source-scan-template
+      #! policy: scan-policy
 
 learningcenter:
   ingressDomain: #@ data.values.tap.domains.learningCenter
