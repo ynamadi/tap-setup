@@ -14,7 +14,7 @@ contour:
       type: LoadBalancer
 
 shared:
-  ca_cert_data: #@ data.values.tap.credentials.ca_cert
+  ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
   ingress_domain: #@ data.values.tap.domains.main
   ingress_issuer: ""
   kubernetes_version: #@ data.values.tap.kubernetesVersion
