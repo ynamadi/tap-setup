@@ -37,7 +37,7 @@ ootb_supply_chain_basic:
   gitops:
     ssh_secret: git-ssh
   cluster_builder: default
-  service_account: default
+  #! service_account: default
 
 
  #! supply_chain: testing_scanning
