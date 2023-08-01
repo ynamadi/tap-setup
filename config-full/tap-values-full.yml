@@ -21,7 +21,7 @@ shared:
 
 ceip_policy_disclosed: true
 buildservice:
-  ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
+  #!ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
