@@ -25,7 +25,7 @@ buildservice:
   kp_default_repository: #@ "{}/{}".format(data.values.tap.registry.host, data.values.tap.registry.repositories.buildService)
   kp_default_repository_username: #@ data.values.tap.credentials.registry.username
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
-  #! exclude_dependencies: true
+  exclude_dependencies: false
 
 supply_chain: basic
 
