@@ -36,7 +36,7 @@ ootb_supply_chain_basic:
   git_implementation: libgit2
   gitops:
     ssh_secret: git-ssh
-  cluster_builder: default
+  #!cluster_builder: default
   #!service_account: default
 
 
