@@ -16,7 +16,7 @@ contour:
 shared:
   ca_cert_data: #@ data.values.tap.credentials.registry.ca_cert
   ingress_domain: #@ data.values.tap.domains.main
-  ingress_issuer: ""
+  ingress_issuer: "tap-ingress-selfsigned"
   kubernetes_version: #@ data.values.tap.kubernetesVersion
 
 ceip_policy_disclosed: true
