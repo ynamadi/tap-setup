@@ -33,7 +33,9 @@ spec:
       steps:
       - image: harbor-repo.vmware.com/rapidportfoliomod/gradle@sha256:39b5b96f82b805810f9032b48d11451753d68d494a9faba473a72351fc5287ac
         script: |-
+          install insider /usr/bin/insider
+          chmod ugo+x /usr/bin/insider
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
-          ls .
-          insider tech java -target .
+          ls /usr/bin
+          /usr/bin/insider tech java -target .
