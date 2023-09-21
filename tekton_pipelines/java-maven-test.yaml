@@ -35,5 +35,4 @@ spec:
         script: |-
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
-          ls /usr/bin
-          /usr/bin/fragments/build-wrapper-maven/mvnw test
+          fragments/build-wrapper-maven/mvnw test
