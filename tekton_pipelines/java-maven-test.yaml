@@ -33,7 +33,7 @@ spec:
         type: string
       spec: null
       steps:
-      - image: gradle
+      - image: library/gradle
         name: test
         resources: {}
         script: |-
