@@ -31,9 +31,9 @@ spec:
       - name: source-revision
         type: string
       steps:
-      - image: docker pull harbor-repo.vmware.com/rapidportfoliomod/gradle@sha256:39b5b96f82b805810f9032b48d11451753d68d494a9faba473a72351fc5287ac
+      - image: harbor-repo.vmware.com/rapidportfoliomod/gradle@sha256:39b5b96f82b805810f9032b48d11451753d68d494a9faba473a72351fc5287ac
         script: |-
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
           ls
-         insider tech java -target .
+          insider tech java -target .
