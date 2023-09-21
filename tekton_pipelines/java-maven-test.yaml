@@ -31,7 +31,7 @@ spec:
       - name: source-revision
         type: string
       steps:
-      - image: gcr.io/cloud-builders/mvn@sha256:57523fc43394d6d9d2414ee8d1c85ed7a13460cbb268c3cd16d28cfb3859e641
+      - image: harbor.dapo.tap.h2o-4-9446.h2o.vmware.com/library/gradle@sha256:e0476e8123b0c74e761f154528cdb2476d5337a05b4b8884f0f781222af5a963
         name: test
         script: |-
           cd `mktemp -d`
