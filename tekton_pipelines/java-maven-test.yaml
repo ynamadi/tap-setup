@@ -23,19 +23,16 @@ spec:
     - name: source-url
       value: $(params.source-url)
     - name: source-revision
-      value: $(params.source-revision)
+      value: $(params.source-revision) 
     taskSpec:
-      metadata: {}
       params:
       - name: source-url
         type: string
       - name: source-revision
         type: string
-      spec: null
       steps:
-      - image: library/gradle
+      - image: gradle
         name: test
-        resources: {}
         script: |-
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
