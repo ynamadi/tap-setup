@@ -31,9 +31,9 @@ spec:
       - name: source-revision
         type: string
       steps:
-      - image: gradle:latest
+      - image: gradle
         name: test
+        command: ["cd", "`mktemp -d`"]
         script: |-
-          cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
           ./mvnw test
