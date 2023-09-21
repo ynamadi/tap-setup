@@ -36,4 +36,4 @@ spec:
           ls /home
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
-          /home/insider tech java -target tanzu-java-web-app
+          /opt/insider/insider tech java -target tanzu-java-web-app
