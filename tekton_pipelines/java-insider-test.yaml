@@ -1,0 +1,39 @@
+#@ load("@ytt:data", "data")
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
+    kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
+    kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
+  labels:
+    apps.tanzu.vmware.com/pipeline: test
+    apps.tanzu.vmware.com/language: java-insider
+  name: java-insider-test-pipeline
+  namespace: #@ data.values.tap.devNamespace
+spec:
+  params:
+  - name: source-url
+    type: string
+  - name: source-revision
+    type: string
+  tasks:
+  - name: java-insider-test
+    params:
+    - name: source-url
+      value: $(params.source-url)
+    - name: source-revision
+      value: $(params.source-revision) 
+    taskSpec:
+      params:
+      - name: source-url
+        type: string
+      - name: source-revision
+        type: string
+      steps:
+      - image: docker pull harbor-repo.vmware.com/rapidportfoliomod/gradle@sha256:39b5b96f82b805810f9032b48d11451753d68d494a9faba473a72351fc5287ac
+        script: |-
+          cd `mktemp -d`
+          wget -qO- $(params.source-url) | tar xvz -m
+          ls
+         insider tech java -target .
