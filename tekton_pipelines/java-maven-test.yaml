@@ -31,8 +31,7 @@ spec:
       - name: source-revision
         type: string
       steps:
-      - image: harbor.dapo.tap.h2o-4-9446.h2o.vmware.com/library/gradle@sha256:e0476e8123b0c74e761f154528cdb2476d5337a05b4b8884f0f781222af5a963
-        name: test
+      - image: docker pull harbor-repo.vmware.com/rapidportfoliomod/gradle@sha256:39b5b96f82b805810f9032b48d11451753d68d494a9faba473a72351fc5287ac
         script: |-
           cd `mktemp -d`
           wget -qO- $(params.source-url) | tar xvz -m
