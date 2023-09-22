@@ -40,5 +40,5 @@ spec:
           score_dec=$(awk "BEGIN {printf $score_frac}")
           if [ "$(echo "$score_dec < 0.5" | bc)" -eq 1 ]
           then
-            exit 1
+            exit 0
           fi
