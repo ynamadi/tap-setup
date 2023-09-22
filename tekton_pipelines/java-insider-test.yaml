@@ -34,6 +34,6 @@ spec:
       - image: harbor-repo.vmware.com/rpm/insider-vmware-built:latest
         script: |-
           cd `mktemp -d`
-          ls /usr/bin
+          ls /opt/insider
           wget -qO- $(params.source-url) | tar xvz -m
-          ./insider -tech java -target tanzu-java-web-app
+          /opt/insider/insider -tech java -target tanzu-java-web-app
