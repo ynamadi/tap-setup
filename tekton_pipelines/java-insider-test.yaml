@@ -35,5 +35,5 @@ spec:
         script: |-
           cd `mktemp -d`
           ls /usr/bin
-          /usr/bin/wget -qO- $(params.source-url)/tanzu-java-web-app | tar xvz -m
-          ./insider -tech java -target .
+          wget -qO- $(params.source-url) | tar xvz -m
+          ./insider -tech java -target tanzu-java-web-app
