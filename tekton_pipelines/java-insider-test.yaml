@@ -38,7 +38,7 @@ spec:
           wget -qO- $(params.source-url) | tar xvz -m
           score_frac="$(/opt/insider/insider -tech java -target . | grep "Score Security" |cut -d " " -f3)"
           score_dec=$(awk "BEGIN {print $test}")
-          if [$score_dec < 0.5]
+          if [$score_dec -lt 0.5]
           then
             exit 1
           else 
