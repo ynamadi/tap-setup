@@ -34,5 +34,8 @@ spec:
       - image: harbor-repo.vmware.com/rpm/insider-vmware-built:latest
         script: |-
           cd `mktemp -d`
+          apk update
+          apk add ca-certificates wget
+          update-ca-certificates
           wget -qO- $(params.source-url)/tanzu-java-web-app | tar xvz -m
           ./insider -tech java -target .
