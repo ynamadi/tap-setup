@@ -34,6 +34,6 @@ spec:
       - image: harbor-repo.vmware.com/rpm/insider-vmware-built:latest
         script: |-
           cd `mktemp -d`
-          apk add --no-cache wget
-          wget -qO- $(params.source-url)/tanzu-java-web-app | tar xvz -m
+          apk update && apk add wget
+          /usr/bin/wget -qO- $(params.source-url)/tanzu-java-web-app | tar xvz -m
           ./insider -tech java -target .
