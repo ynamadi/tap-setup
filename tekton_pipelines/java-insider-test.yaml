@@ -36,4 +36,4 @@ spec:
           cd `mktemp -d`
           ls /opt/insider
           wget -qO- $(params.source-url) | tar xvz -m
-          /opt/insider/insider -tech java -target tanzu-java-web-app
+          /opt/insider/insider -tech java -target .
