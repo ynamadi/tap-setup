@@ -37,11 +37,6 @@ spec:
           ls /opt/insider
           wget -qO- $(params.source-url) | tar xvz -m
           score_frac="$(/opt/insider/insider -tech java -target . | grep "Score Security" |cut -d " " -f3)"
-          score_dec=$(awk "BEGIN {print $score_frac}")
-          benchmark=0.5
-          if [ $score_dec -lt $benchmark ]
-          then
-            exit 1
-          else 
-            exit 0
-          fi
+          score_dec=$(awk "BEGIN {printf $score_frac}")
+          result=$(awk "BEGIN {printf ($score_dec<0.5)?1:0}")
+          exit $result
