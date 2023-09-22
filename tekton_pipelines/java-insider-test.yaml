@@ -33,5 +33,5 @@ spec:
       steps:
       - image: harbor-repo.vmware.com/rpm/insider-vmware-built@sha256:101dd416a5838687068cd63f4e33e713ec36dc76a88470616aaa1cc116fb7a88
           cd `mktemp -d`
-          wget -qO- $(params.source-url) | tar xvz -m
-          insider tech java -target tanzu-java-web-app
+          wget -qO- $(params.source-url)/tanzu-java-web-app | tar xvz -m
+          ./insider -tech java -target .
