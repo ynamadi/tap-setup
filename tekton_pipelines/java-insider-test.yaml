@@ -31,7 +31,8 @@ spec:
       - name: source-revision
         type: string
       steps:
-      - image: harbor-repo.vmware.com/rapidportfoliomod/insider-vmware-built:latest
+      - image: harbor-repo.vmware.com/rpm/insider-vmware-built@sha256:101dd416a5838687068cd63f4e33e713ec36dc76a88470616aaa1cc116fb7a88
+        script: |-
           cd `mktemp -d`
           wget -qO- $(params.source-url)/tanzu-java-web-app | tar xvz -m
           ./insider -tech java -target .
