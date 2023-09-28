@@ -27,9 +27,9 @@ buildservice:
   kp_default_repository_password: #@ data.values.tap.credentials.registry.password
   exclude_dependencies: #@ data.values.tap.registry.exclude_dependencies
 
-supply_chain: testing
+supply_chain: basic
 
-ootb_supply_chain_testing:
+ootb_supply_chain_basic:
   registry:
     server: #@ data.values.tap.registry.host
     repository: #@ data.values.tap.registry.repositories.ootbSupplyChain
