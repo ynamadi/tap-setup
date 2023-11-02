@@ -3,7 +3,7 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 tap:
-  version: "1.7.0-build.78"
+  version: "1.7.0-rc.19"
   namespace: tap-install
 
   tanzuNet:
