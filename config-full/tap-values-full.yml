@@ -140,6 +140,9 @@ namespace_provisioner:
     ref: orgin/main
     subPath: /gitops-install
     url: https://github.com/ynamadi/namespace-provisioner-config.git
+    secretRef:
+      name: namespace-provisioner-cred
+      namespace: tap-install
   additional_sources:
   - git:
       ref: origin/main
