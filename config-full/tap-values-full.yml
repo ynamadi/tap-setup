@@ -134,6 +134,29 @@ appliveview:
     namespace: tanzu-system-ingress
     secretName: tls
 
+namespace_provisioner:
+  controller: false
+  gitops_install:
+    ref: orgin/main
+    subPath: /gitops-install
+    url: https://github.com/ynamadi/namespace-provisioner-config.git
+  additional_sources:
+  - git:
+      ref: orgin/main
+      subPath: /scan-policies
+      url: https://github.com/ynamadi/namespace-provisioner-config.git
+      secretRef:
+        name: git-ssh
+        namespace: tap-dev
+        create_export: true
+  - git:
+      ref: orgin/main
+      subPath: /tekton-pipelines
+      url: https://github.com/ynamadi/namespace-provisioner-config.git
+      secretRef:
+        name: git-ssh
+        namespace: tap-dev
+        create_export: true
 package_overlays:
 - name: tap-gui
   secrets:

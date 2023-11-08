@@ -15,7 +15,7 @@
 # vendor/
 /gitops/tap-install-config.yml.tmp
 /gitops/tap-install-secrets.yml.tmp
-tanzu-cluster-essentials
+tanzu-cluster-essentialsOLD
 /eks-cluster-setup.sh
 /aks-cluster-setup.sh
 /.idea/

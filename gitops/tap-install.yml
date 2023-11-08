@@ -49,8 +49,6 @@ spec:
   template:
   - ytt:
       paths:
-      - scan_policies
-      - tekton_pipelines
       - config-proxy
       - scanning-tools
       valuesFrom:
