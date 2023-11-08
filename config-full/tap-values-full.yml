@@ -148,6 +148,7 @@ namespace_provisioner:
       secretRef:
         name: git-ssh
         namespace: tap-install
+        create_export: true
   - git:
       ref: orgin/main
       subPath: /tekton-pipelines
@@ -155,6 +156,7 @@ namespace_provisioner:
       secretRef:
         name: git-ssh
         namespace: tap-install
+        create_export: true
 package_overlays:
 - name: tap-gui
   secrets:
