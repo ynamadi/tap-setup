@@ -148,7 +148,7 @@ namespace_provisioner:
       secretRef:
         name: namespace-provisioner-cred
         namespace: tap-install
-        create_export: true
+        create_export: false
   - git:
       ref: orgin/main
       subPath: /tekton-pipelines
