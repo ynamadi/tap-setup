@@ -141,7 +141,7 @@ namespace_provisioner:
     subPath: gitops-install
     url: https://github.com/ynamadi/namespace-provisioner-config.git
     secretRef:
-      name: namespace-provisioner-cred
+      name: ns-provisioner
       namespace: tap-install
   additional_sources:
   - git:
@@ -149,7 +149,7 @@ namespace_provisioner:
       subPath: scan-policies
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
-        name: namespace-provisioner-cred
+        name: ns-provisioner-scan-policies
         namespace: tap-install
         create_export: true
     path: _ytt_lib/scan-policies
