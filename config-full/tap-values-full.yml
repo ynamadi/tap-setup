@@ -146,7 +146,7 @@ namespace_provisioner:
       subPath: /scan-policies
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
-        name: git-ssh
+        name: namespace-provisioner-cred
         namespace: tap-install
         create_export: true
   - git:
@@ -154,7 +154,7 @@ namespace_provisioner:
       subPath: /tekton-pipelines
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
-        name: git-ssh
+        name: namespace-provisioner-cred
         namespace: tap-install
         create_export: true
 package_overlays:
