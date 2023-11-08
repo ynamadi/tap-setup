@@ -143,18 +143,8 @@ namespace_provisioner:
     secretRef:
       name: ns-provisioner
       namespace: tap-install
-      create_export: false
-  additional_sources:
-  - git:
-      ref: origin/main
-      subPath: scan-policies
-      url: https://github.com/ynamadi/namespace-provisioner-config.git
-      secretRef:
-        name: ns-provisioner-scan-policies
-        namespace: tap-install
-        create_export: true
-    path: _ytt_lib/scan-policies
-
+      create_export: true
+ 
 package_overlays:
 - name: tap-gui
   secrets:
