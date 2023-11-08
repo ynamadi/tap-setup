@@ -143,6 +143,7 @@ namespace_provisioner:
     secretRef:
       name: ns-provisioner
       namespace: tap-install
+      create_export: true
   additional_sources:
   - git:
       ref: origin/main
