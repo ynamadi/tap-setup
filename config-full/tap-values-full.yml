@@ -147,7 +147,7 @@ namespace_provisioner:
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
         name: git-ssh
-        namespace: tap-dev
+        namespace: tap-install
         create_export: true
   - git:
       ref: orgin/main
@@ -155,7 +155,7 @@ namespace_provisioner:
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
         name: git-ssh
-        namespace: tap-dev
+        namespace: tap-install
         create_export: true
 package_overlays:
 - name: tap-gui
