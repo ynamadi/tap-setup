@@ -140,7 +140,7 @@ namespace_provisioner:
     ref: orgin/main
     subPath: gitops-install
     url: https://github.com/ynamadi/tap-developer-namespace.git
- additional_sources:
+  additional_sources:
   - git:
       ref: origin/main
       subPath: scan-policies
