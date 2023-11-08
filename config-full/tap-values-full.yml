@@ -144,7 +144,7 @@ namespace_provisioner:
   - git:
       ref: origin/main
       subPath: scan-policies
-      url: https://github.com/ynamadi/namespace-provisioner-config.git
+      url: https://github.com/ynamadi/namespace-provisioner-config
       secretRef:
         name: namespace-provisioner-cred
         namespace: tap-install
