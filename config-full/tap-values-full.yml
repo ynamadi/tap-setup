@@ -148,11 +148,7 @@ namespace_provisioner:
       secretRef:
         name: namespace-provisioner-cred
         namespace: tap-install
-        create_export: false
-  - git:
-      ref: orgin/main
-      subPath: /tekton-pipelines
-      url: https://github.com/ynamadi/namespace-provisioner-config.git
+        create_export: true
 package_overlays:
 - name: tap-gui
   secrets:
