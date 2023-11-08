@@ -146,7 +146,7 @@ namespace_provisioner:
       subPath: scan-policies
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
-        name: ns-provisioner-scan-policies
+        name: ns-provisioner
         namespace: tap-install
         create_export: true
     path: _ytt_lib/scan-policies
