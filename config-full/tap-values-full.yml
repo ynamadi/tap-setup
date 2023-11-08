@@ -142,7 +142,7 @@ namespace_provisioner:
     url: https://github.com/ynamadi/namespace-provisioner-config.git
   additional_sources:
   - git:
-      ref: orgin/main
+      ref: main
       subPath: scan-policies
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
