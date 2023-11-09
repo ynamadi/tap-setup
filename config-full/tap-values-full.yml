@@ -136,13 +136,6 @@ appliveview:
 
 namespace_provisioner:
   controller: false
-  import_data_values_secrets:
-  - name: snyk-token-secret
-    namespace: tap-install
-    create_export: true
-  - name: carbonblack-token-secret
-    namespace: tap-install
-    create_export: true
   additional_sources:
   - git:
       ref: origin/main
