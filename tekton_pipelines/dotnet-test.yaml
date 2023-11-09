@@ -10,7 +10,7 @@ metadata:
     kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
     kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
   name: dotnet-test-pipeline
-  namespace: #@ data.values.tap.devNamespace
+  namespace: #@ data.values.tap.namespace
 spec:
   params:
   - name: source-url

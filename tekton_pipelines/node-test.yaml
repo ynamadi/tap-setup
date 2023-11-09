@@ -10,7 +10,7 @@ metadata:
     apps.tanzu.vmware.com/pipeline: test
     apps.tanzu.vmware.com/language: node
   name: node-test-pipeline
-  namespace: #@ data.values.tap.devNamespace
+  namespace: #@ data.values.tap.namespace
 spec:
   params:
     - name: source-url

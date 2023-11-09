@@ -7,7 +7,7 @@ metadata:
     kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
     kapp.k14s.io/change-rule.2: "delete after deleting tanzu-app-platform"
   name: java-maven-test-pipeline2
-  namespace: #@ data.values.tap.devNamespace
+  namespace: #@ data.values.tap.namespace
   labels:
     apps.tanzu.vmware.com/pipeline: test
     apps.tanzu.vmware.com/language: java-bellsoft

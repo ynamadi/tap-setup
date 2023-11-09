@@ -4,7 +4,7 @@ apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
 metadata:
   name: snyk-scan-policy
-  namespace: #@ data.values.tap.devNamespace
+  namespace: #@ data.values.tap.namespace
   labels:
     'app.kubernetes.io/part-of': 'component-a'
   annotations:

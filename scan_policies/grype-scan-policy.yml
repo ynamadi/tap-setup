@@ -4,7 +4,7 @@ apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
 metadata:
   name: scan-policy
-  namespace: #@ data.values.tap.devNamespace
+  namespace: #@ data.values.tap.namespace
   annotations:
     kapp.k14s.io/change-rule.0: "upsert after upserting scancontroller"
     kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform"

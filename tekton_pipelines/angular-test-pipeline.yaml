@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: angular-test-pipeline
-  namespace: #@ data.values.tap.devNamespace
+  namespace: #@ data.values.tap.namespace
   annotations:
     kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-app-platform"
     kapp.k14s.io/change-rule.1: "upsert after upserting tanzu-app-platform-configs"
