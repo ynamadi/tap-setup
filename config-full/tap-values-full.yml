@@ -136,10 +136,6 @@ appliveview:
 
 namespace_provisioner:
   controller: false
-  gitops_install:
-    ref: orgin/main
-    subPath: gitops-install
-    url: https://github.com/ynamadi/tap-developer-namespace.git
   additional_sources:
   - git:
       ref: origin/main
@@ -150,6 +146,10 @@ namespace_provisioner:
         namespace: tap-install
         create_export: true
     path: _ytt_lib/scan-policies
+  gitops_install:
+    ref: main
+    subPath: gitops-install
+    url: https://github.com/ynamadi/tap-developer-namespace.git
 
 package_overlays:
 - name: tap-gui
