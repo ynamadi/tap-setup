@@ -150,10 +150,6 @@ namespace_provisioner:
     ref: main
     subPath: gitops-install
     url: https://github.com/ynamadi/tap-developer-namespace.git
-  overlay_secrets:
-  - name: tap-values
-    namespace: tap-install
-    create_export: true
 
 package_overlays:
 - name: tap-gui
