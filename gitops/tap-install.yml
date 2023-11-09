@@ -50,7 +50,6 @@ spec:
   - ytt:
       paths:
       - config-proxy
-      - scanning-tools
       valuesFrom:
       - configMapRef:
           name: tap-install-gitops
