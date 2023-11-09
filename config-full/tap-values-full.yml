@@ -139,17 +139,21 @@ namespace_provisioner:
   additional_sources:
   - git:
       ref: origin/main
-      subPath: scan-policies
+      subPath: additional-resources
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
         name: ns-provisioner
         namespace: tap-install
         create_export: true
-    path: _ytt_lib/scan-policies
+    path: _ytt_lib/additional-resources
   gitops_install:
     ref: main
     subPath: gitops-install
     url: https://github.com/ynamadi/tap-developer-namespace.git
+  overlay_secrets:
+  - name: tap-values
+    namespace: tap-install
+    create_export: true
 
 package_overlays:
 - name: tap-gui
