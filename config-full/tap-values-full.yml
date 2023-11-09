@@ -150,7 +150,14 @@ namespace_provisioner:
     ref: main
     subPath: gitops-install
     url: https://github.com/ynamadi/tap-developer-namespace.git
-
+  default_parameters:
+    supply_chain_service_account:
+      secrets:
+      - registry-credentials
+      - git-ssh
+      - cosign-key-pair
+      imagePullSecrets:
+      - registry-credentials
 package_overlays:
 - name: tap-gui
   secrets:
