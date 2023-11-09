@@ -139,13 +139,13 @@ namespace_provisioner:
   additional_sources:
   - git:
       ref: origin/main
-      subPath: additional-resources
+      subPath: test
       url: https://github.com/ynamadi/namespace-provisioner-config.git
       secretRef:
         name: ns-provisioner
         namespace: tap-install
         create_export: true
-    path: _ytt_lib/additional-resources
+    path: _ytt_lib/test
   gitops_install:
     ref: main
     subPath: gitops-install
