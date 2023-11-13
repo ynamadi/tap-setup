@@ -6,7 +6,8 @@ kind: ClusterIssuer
 metadata:
   name: letsencrypt-production
   annotations:
-    kapp.k14s.io/change-rule: "upsert after upserting tap-configs"
+    kapp.k14s.io/change-rule.0: "upsert after upserting cert-manager"
+    kapp.k14s.io/change-rule.1: "upsert after upserting cluster-issuer"
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
