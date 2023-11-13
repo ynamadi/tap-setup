@@ -139,13 +139,22 @@ namespace_provisioner:
   additional_sources:
   - git:
       ref: origin/main
-      subPath: additional-resources
-      url: https://github.com/ynamadi/namespace-provisioner-config.git
+      subPath: scan-policies
+      url: https://github.com/ynamadi/tap-resources.git
       secretRef:
-        name: ns-provisioner
+        name: scan-policies-repo
         namespace: tap-install
         create_export: true
-    path: _ytt_lib/additional-resources
+    path: _ytt_lib/scan-policies
+  - git:
+      ref: origin/main
+      subPath: tekton-pipelines
+      url: https://github.com/ynamadi/tap-resources.git
+      secretRef:
+        name: tekton-pipelines-repo
+        namespace: tap-install
+        create_export: true
+    path: _ytt_lib/tekton-pipelines
   gitops_install:
     ref: main
     subPath: gitops-install
